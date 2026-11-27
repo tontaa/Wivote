@@ -65,8 +65,6 @@
     .step-active-pop {
       animation: popBounce 0.35s ease-out forwards;
     }
-
-    /* Pusher Character Animations on Turnout Bars */
     @keyframes pusherLean {
       0%, 100% { transform: translateX(0px) rotate(12deg); }
       50% { transform: translateX(3px) rotate(18deg); }
@@ -92,6 +90,46 @@
       animation: legSwingB 0.5s ease-in-out infinite;
       transform-box: fill-box;
       transform-origin: top center;
+    }
+
+    /* Unique Faculty Progress Bar Textures & Runner Animations */
+    @keyframes stripeSlide {
+      0% { background-position: 0 0; }
+      100% { background-position: 24px 0; }
+    }
+    .bar-striped {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.28) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.28) 50%,
+        rgba(255, 255, 255, 0.28) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 24px 24px;
+      animation: stripeSlide 1.2s linear infinite;
+    }
+    .bar-dotted {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.45) 1.5px, transparent 1.5px);
+      background-size: 8px 8px;
+    }
+    .bar-wave {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.22),
+        rgba(255, 255, 255, 0.22) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+    }
+    @keyframes runnerBounce {
+      0%, 100% { transform: translateY(0px) rotate(-4deg); }
+      50% { transform: translateY(-3px) rotate(6deg); }
+    }
+    .runner-badge {
+      animation: runnerBounce 0.65s ease-in-out infinite;
     }
 
     .custom-scroll::-webkit-scrollbar {
@@ -173,7 +211,7 @@
           </button>
         </header>
 
-        <!-- Clean 1-2-3-4 Progress Stepper -->
+        <!-- 1-2-3-4 Progress Stepper -->
         <div class="bg-slate-50/95 px-4 py-2.5 border-b border-slate-100">
           <div class="relative flex items-center justify-between">
             <div class="absolute left-4 right-4 top-3.5 h-1.5 bg-slate-200 rounded-full -z-0"></div>
@@ -221,7 +259,6 @@
             <p class="text-xs text-red-100 mt-0.5">กรุณายืนยันตัวตนด้วย Buasri ID เพื่อเริ่มใช้งานอินเทอร์เน็ต</p>
           </div>
 
-          <!-- Login Form Card -->
           <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-4 space-y-3.5">
             <div class="flex items-center justify-between">
               <h2 class="font-semibold text-slate-800 text-sm">เข้าสู่ระบบ Buasri ID</h2>
@@ -256,11 +293,10 @@
             </button>
           </div>
 
-          <!-- Privacy Note -->
           <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-3 flex items-start gap-2">
             <span class="text-blue-600 text-sm">🛡️</span>
             <p class="text-xs text-slate-600 leading-relaxed">
-              ระบบ <strong class="text-slate-800">Wi-vote</strong> ตรวจสอบเฉพาะสถานะการรับทราบและการใช้สิทธิ โดย <strong class="text-slate-800">ไม่เชื่อมโยงตัวตนกับผู้สมัครที่คุณเลือก</strong>
+              ระบบ <strong class="text-slate-800">Wi-vote</strong> ตรวจสอบเฉพาะสถานะการรับทราบและการใช้สิทธิ (เฉพาะระดับปริญญาตรี) โดย <strong class="text-slate-800">ไม่เชื่อมโยงตัวตนกับผู้สมัครที่คุณเลือก</strong>
             </p>
           </div>
         </section>
@@ -274,7 +310,7 @@
           </div>
           <div>
             <h3 id="loading-title" class="font-semibold text-slate-800 text-base">กำลังยืนยันตัวตน Buasri ID...</h3>
-            <p id="loading-desc" class="text-xs text-slate-500 mt-1">กำลังตรวจสอบสถานะการรับทราบข้อมูลเลือกตั้ง</p>
+            <p id="loading-desc" class="text-xs text-slate-500 mt-1">กำลังตรวจสอบสถานะผู้มีสิทธิเลือกตั้ง (ระดับปริญญาตรี)</p>
           </div>
         </section>
 
@@ -282,17 +318,17 @@
         <!-- STEP 2: Wi-vote Landing Page               -->
         <!-- ========================================== -->
         <section id="view-step-2" class="hidden animate-view space-y-3">
-          <!-- Live Ticker Strip -->
+          <!-- Fact Data Ticker Strip -->
           <div class="bg-slate-900 text-white rounded-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-sm">
             <p id="step2-ticker" class="text-[11px] font-semibold text-amber-300 truncate">
-              🔴 LIVE | ประสานมิตร 8,304 • องครักษ์ 5,983 • ห่าง 2,321
+              ใช้สิทธิ ป.ตรี แล้ว 19,544 / 29,339 คน (66.61%) • วันเลือกตั้ง 30 ธ.ค. 69
             </p>
-            <button onclick="rotateGenZCopy()" class="text-[10px] bg-white/15 active:bg-white/25 text-white px-2 py-0.5 rounded-full shrink-0">
-              สุ่มคำกระตุ้น ↻
+            <button onclick="rotateFactData()" class="text-[10px] bg-white/15 active:bg-white/25 text-white px-2 py-0.5 rounded-full shrink-0">
+              อัปเดตสถิติ ↻
             </button>
           </div>
 
-          <!-- Election Alert Banner -->
+          <!-- Election Alert Banner (Date: 30 ธ.ค.) -->
           <div class="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-3xl p-4 shadow-md">
             <div class="flex items-center justify-between gap-2">
               <span class="bg-amber-400 text-slate-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
@@ -304,23 +340,23 @@
             <div class="mt-2.5 bg-black/20 rounded-2xl p-2.5 flex items-center gap-3">
               <div class="bg-white text-red-700 rounded-xl px-2.5 py-1 text-center shrink-0">
                 <div class="text-[10px] font-bold">วันเลือกตั้ง</div>
-                <div class="text-sm font-extrabold leading-tight">28 พ.ย.</div>
+                <div class="text-sm font-extrabold leading-tight">30 ธ.ค.</div>
               </div>
               <div class="text-xs space-y-0.5">
                 <p class="font-semibold text-white text-sm">เวลา 08.00 – 17.00 น.</p>
-                <p class="text-red-100 text-[11px]">ลงคะแนนออนไลน์ผ่านระบบ SUPREME</p>
+                <p class="text-red-100 text-[11px]">ผู้มีสิทธิ: นิสิตระดับปริญญาตรี (29,339 คน)</p>
               </div>
             </div>
           </div>
 
-          <!-- Gen Z Psychological Nudge Banner -->
-          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 space-y-1.5">
+          <!-- Fact Data Summary Card -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-1.5">
             <div class="flex items-center justify-between">
-              <span id="step2-nudge-badge" class="text-[10px] font-bold bg-red-600 text-white px-2 py-0.5 rounded-full">FOMO • โหวตแล้ว 14,287 คน</span>
-              <span class="text-[11px] font-extrabold text-red-600"><span id="nudge-pct">68.03</span>%</span>
+              <span id="step2-fact-badge" class="text-[10px] font-bold bg-slate-800 text-white px-2 py-0.5 rounded-full">ฐานผู้มีสิทธิ ป.ตรี</span>
+              <span class="text-[11px] font-extrabold text-red-600"><span id="nudge-pct">66.61</span>%</span>
             </div>
-            <p id="step2-nudge-text" class="text-xs font-bold text-slate-800 leading-snug">
-              มีคนโหวตไปแล้ว 14,287 คน เหลือแกคนเดียวป่ะ 👀
+            <p id="step2-fact-text" class="text-xs font-semibold text-slate-800 leading-snug">
+              คำนวณจากนิสิตทั้งหมด 32,832 คน หัก ป.โท (2,262), ป.เอก (1,100) และ ป.บัตรฯ (96) คงเหลือผู้มีสิทธิ ป.ตรี 29,339 คน
             </p>
           </div>
 
@@ -331,7 +367,6 @@
               <span class="text-[11px] text-slate-400">2 พรรคผู้สมัคร</span>
             </div>
 
-            <!-- Candidate 1 -->
             <div onclick="togglePolicy('pol-1')" class="bg-slate-50 active:bg-red-50/50 border border-slate-200 rounded-2xl p-3 cursor-pointer transition">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5 min-w-0">
@@ -349,7 +384,6 @@
               </div>
             </div>
 
-            <!-- Candidate 2 -->
             <div onclick="togglePolicy('pol-2')" class="bg-slate-50 active:bg-red-50/50 border border-slate-200 rounded-2xl p-3 cursor-pointer transition">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5 min-w-0">
@@ -416,7 +450,7 @@
                 <span class="font-bold tracking-wide text-sm">SUPREME</span>
                 <span class="text-[10px] bg-red-600 px-2 py-0.5 rounded font-medium">E-Voting Mockup</span>
               </div>
-              <p class="text-[11px] text-slate-300 mt-0.5">บัตรเลือกตั้งอิเล็กทรอนิกส์ (ระบบจำลองเพื่อการนำเสนอ)</p>
+              <p class="text-[11px] text-slate-300 mt-0.5">บัตรเลือกตั้งอิเล็กทรอนิกส์ (30 ธ.ค. 2569)</p>
             </div>
             <span class="text-[11px] bg-slate-700 text-emerald-300 px-2 py-1 rounded-lg shrink-0">เข้ารหัสแยกตัวตน</span>
           </div>
@@ -470,129 +504,108 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- STEP 4: Feedback & Rivalry Turnout Board   -->
+        <!-- STEP 4: Turnout % By Unique Faculty Bars   -->
         <!-- ========================================== -->
         <section id="view-step-4" class="hidden animate-view space-y-3.5">
           <!-- Receipt Card -->
-          <div class="bg-emerald-50 border border-emerald-200 rounded-3xl p-3.5 text-center space-y-1">
-            <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center text-lg mx-auto shadow-sm step-active-pop">✓</div>
-            <h2 class="text-base font-bold text-emerald-900">บันทึกการใช้สิทธิเรียบร้อยแล้ว</h2>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-3xl p-3 text-center space-y-1">
+            <div class="w-9 h-9 bg-emerald-600 text-white rounded-full flex items-center justify-center text-base mx-auto shadow-sm step-active-pop">✓</div>
+            <h2 class="text-sm font-bold text-emerald-900">บันทึกการใช้สิทธิเรียบร้อยแล้ว (30 ธ.ค. 2569)</h2>
             <p class="text-[11px] text-emerald-700">
-              1 เสียงของคุณช่วยขยับแต้มให้วิทยาเขตแล้ว!
+              ฐานผู้มีสิทธิระดับปริญญาตรี 29,339 คน (แยกตามอัตลักษณ์ 16 คณะ/วิทยาลัย)
             </p>
-            <div class="inline-block bg-white border border-emerald-200 rounded-xl px-2.5 py-0.5 text-[10px] text-slate-500">
-              Ref ID: <span id="receipt-ref" class="font-mono font-semibold text-slate-700">SWU-2026-8849</span>
-            </div>
           </div>
 
-          <!-- Psychological Campus Rivalry & Turnout Card -->
+          <!-- Overall Turnout & Pushing Character -->
           <div class="bg-slate-50 border border-slate-200 rounded-3xl p-3.5 space-y-3">
-            <!-- Live Ticker Header -->
-            <div class="bg-slate-900 text-white rounded-xl px-2.5 py-1.5 flex items-center justify-between gap-2">
-              <p id="step4-ticker" class="text-[11px] font-semibold text-amber-300 truncate">
-                🔴 LIVE | ประสานมิตร 8,305 • องครักษ์ 5,983 • ห่าง 2,322
-              </p>
-              <span class="text-[9px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded shrink-0 animate-pulse">LIVE</span>
-            </div>
-
-            <!-- Overall Summary + Pushing Character -->
-            <div class="bg-white p-3 rounded-2xl border border-slate-100 space-y-2">
-              <div class="flex items-baseline justify-between">
-                <div>
-                  <span class="text-xs text-slate-500">รวมมาใช้สิทธิแล้ว </span>
-                  <span id="stat-voted" class="text-xl font-extrabold text-red-600">14,288</span>
-                  <span class="text-xs text-slate-500"> คน</span>
-                </div>
-                <span class="text-lg font-extrabold text-slate-800"><span id="stat-percent">68.04</span>%</span>
+            <div class="flex items-baseline justify-between">
+              <div>
+                <p class="text-[11px] text-slate-500">เปอร์เซ็นต์มาใช้สิทธิรวม (ป.ตรี)</p>
+                <p class="text-xs font-semibold text-slate-700">
+                  <span id="stat-voted" class="text-red-600 font-extrabold">19,545</span> / <span class="font-bold">29,339</span> คน
+                </p>
               </div>
-
-              <!-- Bar with Pushing Character -->
-              <div class="pt-3.5">
-                <div class="relative">
-                  <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                    <div id="overall-turnout-bar" class="progress-shimmer h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
-                  </div>
-                  <div id="turnout-pusher" class="absolute -top-4 transition-all duration-1000 ease-out pointer-events-none" style="left: 0%;">
-                    <svg width="24" height="24" viewBox="0 0 36 36" class="pusher-lean" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="20" cy="8" r="5" fill="#dc2626"/>
-                      <line x1="18" y1="13" x2="14" y2="24" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
-                      <line x1="17" y1="16" x2="28" y2="15" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round"/>
-                      <line x1="16" y1="18" x2="27" y2="18" stroke="#1e293b" stroke-width="2.6" stroke-linecap="round"/>
-                      <line x1="14" y1="24" x2="8" y2="33" stroke="#1e293b" stroke-width="2.8" stroke-linecap="round" class="leg-a"/>
-                      <line x1="14" y1="24" x2="20" y2="33" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" class="leg-b"/>
-                    </svg>
-                  </div>
-                </div>
+              <div class="text-2xl font-extrabold text-red-600">
+                <span id="stat-percent">66.62</span><span class="text-sm font-bold">%</span>
               </div>
             </div>
 
-            <!-- Rivalry Bars: Prasarnmit vs Ongkharak -->
-            <div class="space-y-2.5">
-              <!-- Prasarnmit -->
-              <div class="bg-white p-2.5 rounded-2xl border border-red-100">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold text-red-700 flex items-center gap-1">
-                    ประสานมิตร <span id="badge-p" class="text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded">นำอยู่</span>
-                  </span>
-                  <span class="font-extrabold text-slate-900"><span id="pct-p">69.21</span>% (<span id="num-p">8,305</span>)</span>
-                </div>
+            <!-- Bar with Pushing Character -->
+            <div class="pt-3.5">
+              <div class="relative">
                 <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                  <div id="bar-prasarnmit" class="bg-red-600 h-2.5 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                  <div id="overall-turnout-bar" class="progress-shimmer h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
                 </div>
-              </div>
-
-              <!-- Ongkharak -->
-              <div class="bg-white p-2.5 rounded-2xl border border-slate-200">
-                <div class="flex items-center justify-between text-xs mb-1">
-                  <span class="font-bold text-slate-700 flex items-center gap-1">
-                    องครักษ์ <span id="badge-o" class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded">ไล่บี้!</span>
-                  </span>
-                  <span class="font-extrabold text-slate-900"><span id="pct-o">66.48</span>% (<span id="num-o">5,983</span>)</span>
-                </div>
-                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                  <div id="bar-ongkharak" class="bg-slate-700 h-2.5 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                <div id="turnout-pusher" class="absolute -top-4 transition-all duration-1000 ease-out pointer-events-none" style="left: 0%;">
+                  <svg width="24" height="24" viewBox="0 0 36 36" class="pusher-lean" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="8" r="5" fill="#dc2626"/>
+                    <line x1="18" y1="13" x2="14" y2="24" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="17" y1="16" x2="28" y2="15" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="16" y1="18" x2="27" y2="18" stroke="#1e293b" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="14" y1="24" x2="8" y2="33" stroke="#1e293b" stroke-width="2.8" stroke-linecap="round" class="leg-a"/>
+                    <line x1="14" y1="24" x2="20" y2="33" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" class="leg-b"/>
+                  </svg>
                 </div>
               </div>
             </div>
 
-            <!-- Dynamic Gen Z Psychological Alert / Rivalry Copy -->
-            <div id="rivalry-box" class="bg-red-50 border border-red-200 rounded-2xl p-3 space-y-1.5">
-              <div class="flex items-center justify-between">
-                <span id="rivalry-tag" class="text-[10px] font-extrabold uppercase tracking-wide bg-red-600 text-white px-2 py-0.5 rounded-full">ยอมเหรอ • ฝั่งตามหลัง</span>
-                <button onclick="rotateGenZCopy()" class="text-[10px] font-semibold text-red-700 underline">เปลี่ยนแคปชัน ↻</button>
-              </div>
-              <p id="rivalry-tension-msg" class="text-xs font-bold text-red-900 leading-snug">
-                ยอมโดนแซงเหรอแก?! ตามอยู่ 2,322 คะแนนเองนะ 😤
+            <!-- Fact Insight Line -->
+            <div id="fact-insight-box" class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+              <p id="fact-tension-msg" class="text-[11px] font-semibold text-slate-800 leading-snug">
+                ประสานมิตรนำอยู่ที่ 67.20% และองครักษ์อยู่ที่ 64.58% (ต่างกัน 2.62%)
               </p>
+              <button onclick="rotateFactData()" class="text-[10px] font-bold text-red-700 shrink-0 underline">เปลี่ยนข้อมูล ↻</button>
             </div>
 
-            <!-- Interactive Boost Buttons: เด็กอโศก vs เด็กนครนายก -->
+            <!-- Boost Buttons: เด็กอโศก vs เด็กนครนายก -->
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="boostCampus('p', 350)" class="bg-red-600 active:bg-red-700 text-white text-xs font-bold py-2.5 px-2.5 rounded-xl shadow-sm transition">
+              <button onclick="boostCampus('p', 350)" class="bg-red-600 active:bg-red-700 text-white text-xs font-bold py-2 px-2.5 rounded-xl shadow-sm transition">
                 + เด็กอโศก (+350)
               </button>
-              <button onclick="boostCampus('o', 550)" class="bg-slate-800 active:bg-slate-900 text-white text-xs font-bold py-2.5 px-2.5 rounded-xl shadow-sm transition">
-                + เด็กนครนายก (+550)
+              <button onclick="boostCampus('o', 350)" class="bg-slate-800 active:bg-slate-900 text-white text-xs font-bold py-2 px-2.5 rounded-xl shadow-sm transition">
+                + เด็กนครนายก (+350)
               </button>
             </div>
           </div>
 
-          <!-- User Satisfaction Feedback -->
-          <div id="feedback-box" class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-2.5">
-            <p class="text-xs font-semibold text-slate-800 text-center">ระบบ Wi-vote ช่วยให้คุณเข้าถึงการเลือกตั้งง่ายขึ้นไหม?</p>
-            <div class="flex justify-center gap-2" id="emoji-buttons">
-              <button onclick="selectFeedback(1, this)" class="emoji-btn text-xl p-2 rounded-2xl bg-slate-50 border border-slate-200 transition">😞</button>
-              <button onclick="selectFeedback(2, this)" class="emoji-btn text-xl p-2 rounded-2xl bg-slate-50 border border-slate-200 transition">😐</button>
-              <button onclick="selectFeedback(3, this)" class="emoji-btn text-xl p-2 rounded-2xl bg-slate-50 border border-slate-200 transition">🙂</button>
-              <button onclick="selectFeedback(4, this)" class="emoji-btn text-xl p-2 rounded-2xl bg-slate-50 border border-slate-200 transition">😊</button>
-              <button onclick="selectFeedback(5, this)" class="emoji-btn text-xl p-2 rounded-2xl bg-slate-50 border border-slate-200 transition">🤩</button>
+          <!-- Campus Summary Cards -->
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-red-50/70 border border-red-200 rounded-2xl p-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-red-800">ประสานมิตร (ป.ตรี)</span>
+                <span id="pct-campus-p" class="text-xs font-extrabold text-red-700">67.20%</span>
+              </div>
+              <p class="text-[10px] text-slate-600 mt-0.5">
+                <span id="voted-campus-p">15,220</span> / <span id="elig-campus-p">22,649</span> คน
+              </p>
             </div>
-            <div class="flex gap-2">
-              <input id="feedback-text" type="text" placeholder="ข้อเสนอแนะเพิ่มเติม (ไม่บังคับ)..."
-                class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none focus:border-red-500" />
-              <button onclick="sendFeedback()" class="bg-slate-800 active:bg-slate-900 text-white text-xs font-medium px-3.5 py-2 rounded-xl transition shrink-0">
-                ส่งผลประเมิน
-              </button>
+            <div class="bg-slate-100/80 border border-slate-200 rounded-2xl p-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold text-slate-800">องครักษ์ (ป.ตรี)</span>
+                <span id="pct-campus-o" class="text-xs font-extrabold text-slate-800">64.58%</span>
+              </div>
+              <p class="text-[10px] text-slate-600 mt-0.5">
+                <span id="voted-campus-o">4,321</span> / <span id="elig-campus-o">6,690</span> คน
+              </p>
+            </div>
+          </div>
+
+          <!-- Unique Faculty Progress Bars (16 Faculties/Colleges) -->
+          <div class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-4 max-h-[340px] overflow-y-auto custom-scroll">
+            <div>
+              <h3 class="text-xs font-extrabold text-red-700 mb-2.5 flex items-center justify-between">
+                <span>แถบวิ่งรายงานรายคณะ • ประสานมิตร</span>
+                <span class="text-[10px] font-medium text-slate-400">9 คณะ/วิทยาลัย</span>
+              </h3>
+              <div id="faculty-list-prasarnmit" class="space-y-3"></div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100">
+              <h3 class="text-xs font-extrabold text-slate-800 mb-2.5 flex items-center justify-between">
+                <span>แถบวิ่งรายงานรายคณะ • องครักษ์</span>
+                <span class="text-[10px] font-medium text-slate-400">7 คณะ</span>
+              </h3>
+              <div id="faculty-list-ongkharak" class="space-y-3"></div>
             </div>
           </div>
 
@@ -605,7 +618,7 @@
         <!-- Bottom App Footer Disclaimer -->
         <footer class="pt-4 mt-2 border-t border-slate-100 text-center safe-bottom">
           <p class="text-[10px] text-slate-400 leading-snug">
-            SWU Wi-vote Prototype • วิชา PO401 Seminar in Political Science Issues for Sustainable Development
+            SWU Wi-vote Prototype • เลือกตั้ง 30 ธ.ค. 2569 • วิชา PO401 Seminar in Political Science Issues for Sustainable Development
           </p>
         </footer>
       </div>
@@ -619,7 +632,7 @@
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div>
             <h2 class="font-bold text-slate-800 text-base">แผงควบคุมการสาธิต (Demo Control)</h2>
-            <p class="text-xs text-slate-500">จำลองสถานะนิสิตและดูการทำงานของระบบ</p>
+            <p class="text-xs text-slate-500">ฐานผู้มีสิทธิ ป.ตรี 29,339 คน • วันเลือกตั้ง 30 ธ.ค. 69</p>
           </div>
           <button onclick="toggleControlDrawer()" class="md:hidden bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-semibold">ปิด ✕</button>
         </div>
@@ -656,8 +669,8 @@
             <span class="text-[10px] text-emerald-600 font-semibold">Privacy-by-Design</span>
           </div>
           <div id="system-log" class="bg-slate-900 text-emerald-400 font-mono text-[11px] p-3.5 rounded-2xl h-48 overflow-y-auto custom-scroll space-y-1.5 leading-relaxed">
-            <div>[INIT] Wi-vote Captive Portal พร้อมทำงาน...</div>
-            <div>[INFO] รอการยืนยันตัวตนผ่าน Buasri ID</div>
+            <div>[INIT] Wi-vote Captive Portal พร้อมทำงาน (วันเลือกตั้ง 30 ธ.ค. 69)...</div>
+            <div>[INFO] โหลดธีม Progress Bar เฉพาะตัวทั้ง 16 คณะ/วิทยาลัยเรียบร้อย</div>
           </div>
         </div>
       </div>
@@ -669,109 +682,268 @@
     let hasSeenNotice = false;
     let hasVoted = false;
     let selectedCandidate = null;
+    let factIndex = 0;
 
-    const totalP = 12000;
-    const totalO = 9000;
-    const totalAll = totalP + totalO;
+    // 16 Faculties/Colleges with Unique Visual Identity (Color, Pattern, Runner Badge, Motto)
+    const faculties = [
+      // Prasarnmit (9 faculties/colleges -> total 22,649)
+      {
+        id: 'bsm',
+        name: 'คณะบริหารธุรกิจเพื่อสังคม',
+        short: 'BAS',
+        campus: 'p',
+        eligible: 3250,
+        voted: 2210,
+        icon: '📈',
+        gradient: 'linear-gradient(90deg, #1d4ed8, #38bdf8)',
+        pattern: 'bar-striped',
+        border: '#bfdbfe',
+        badgeBg: '#eff6ff',
+        badgeText: '#1d4ed8',
+        tag: 'กราฟพุ่งสายบริหาร'
+      },
+      {
+        id: 'econ',
+        name: 'คณะเศรษฐศาสตร์',
+        short: 'ECON',
+        campus: 'p',
+        eligible: 1680,
+        voted: 1142,
+        icon: '🪙',
+        gradient: 'linear-gradient(90deg, #b45309, #fbbf24)',
+        pattern: 'bar-dotted',
+        border: '#fde68a',
+        badgeBg: '#fffbeb',
+        badgeText: '#b45309',
+        tag: 'ดัชนีเศรษฐศาสตร์'
+      },
+      {
+        id: 'fofa',
+        name: 'คณะศิลปกรรมศาสตร์',
+        short: 'FOFA',
+        campus: 'p',
+        eligible: 2420,
+        voted: 1621,
+        icon: '🎨',
+        gradient: 'linear-gradient(90deg, #db2777, #f43f5e, #fb923c)',
+        pattern: 'bar-wave',
+        border: '#fbcfe8',
+        badgeBg: '#fdf2f8',
+        badgeText: '#be185d',
+        tag: 'ฝีแปรงศิลปกรรม'
+      },
+      {
+        id: 'env',
+        name: 'คณะวัฒนธรรมสิ่งแวดล้อมและการท่องเที่ยวเชิงนิเวศ',
+        short: 'ECE',
+        campus: 'p',
+        eligible: 1490,
+        voted: 983,
+        icon: '🌿',
+        gradient: 'linear-gradient(90deg, #15803d, #4ade80)',
+        pattern: 'bar-wave',
+        border: '#bbf7d0',
+        badgeBg: '#f0fdf4',
+        badgeText: '#15803d',
+        tag: 'เส้นทางสีเขียว'
+      },
+      {
+        id: 'cosci',
+        name: 'วิทยาลัยนวัตกรรมสื่อสารสังคม',
+        short: 'COSCI',
+        campus: 'p',
+        eligible: 2580,
+        voted: 1754,
+        icon: '🎬',
+        gradient: 'linear-gradient(90deg, #7c3aed, #ec4899)',
+        pattern: 'bar-striped',
+        border: '#e9d5ff',
+        badgeBg: '#faf5ff',
+        badgeText: '#7c3aed',
+        tag: 'ไทม์ไลน์นวัตกรรมสื่อ'
+      },
+      {
+        id: 'swis',
+        name: 'วิทยาลัยนานาชาติเพื่อศึกษาความยั่งยืน',
+        short: 'SWUIC',
+        campus: 'p',
+        eligible: 1320,
+        voted: 871,
+        icon: '🌍',
+        gradient: 'linear-gradient(90deg, #0d9488, #2dd4bf)',
+        pattern: 'bar-dotted',
+        border: '#99f6e4',
+        badgeBg: '#f0fdfa',
+        badgeText: '#0f766e',
+        tag: 'Global Sustainability'
+      },
+      {
+        id: 'cci',
+        name: 'วิทยาลัยอุตสาหกรรมสร้างสรรค์',
+        short: 'CCI',
+        campus: 'p',
+        eligible: 1890,
+        voted: 1247,
+        icon: '💎',
+        gradient: 'linear-gradient(90deg, #ea580c, #facc15)',
+        pattern: 'bar-striped',
+        border: '#fed7aa',
+        badgeBg: '#fff7ed',
+        badgeText: '#c2410c',
+        tag: 'รันเวย์สร้างสรรค์'
+      },
+      {
+        id: 'hum',
+        name: 'คณะมนุษยศาสตร์',
+        short: 'HUM',
+        campus: 'p',
+        eligible: 4120,
+        voted: 2762,
+        icon: '📚',
+        gradient: 'linear-gradient(90deg, #9333ea, #c084fc)',
+        pattern: 'bar-dotted',
+        border: '#e9d5ff',
+        badgeBg: '#faf5ff',
+        badgeText: '#7e22ce',
+        tag: 'หน้าหนังสือมนุษย์ฯ'
+      },
+      {
+        id: 'soc',
+        name: 'คณะสังคมศาสตร์',
+        short: 'SOC',
+        campus: 'p',
+        eligible: 3899,
+        voted: 2624,
+        icon: '⚖️',
+        gradient: 'linear-gradient(90deg, #dc2626, #f87171)',
+        pattern: 'bar-striped',
+        border: '#fecaca',
+        badgeBg: '#fef2f2',
+        badgeText: '#b91c1c',
+        tag: 'พลังพลเมืองสังคมฯ'
+      },
 
-    // Initial close counts so rivalry flips easily when testing buttons
-    let votedP = 7980; // 66.50%
-    let votedO = 5940; // 66.00%
-    let lastLeader = 'P';
-    let copyIndex = 0;
-    let selectedRating = 0;
+      // Ongkharak (7 faculties -> total 6,690)
+      {
+        id: 'eng',
+        name: 'คณะวิศวกรรมศาสตร์',
+        short: 'ENG',
+        campus: 'o',
+        eligible: 1850,
+        voted: 1202,
+        icon: '⚙️',
+        gradient: 'linear-gradient(90deg, #991b1b, #ef4444)',
+        pattern: 'bar-striped',
+        border: '#fecaca',
+        badgeBg: '#fef2f2',
+        badgeText: '#991b1b',
+        tag: 'ฟันเฟืองวิศวะ'
+      },
+      {
+        id: 'pe',
+        name: 'คณะพลศึกษา',
+        short: 'PE',
+        campus: 'o',
+        eligible: 1120,
+        voted: 739,
+        icon: '🏃',
+        gradient: 'linear-gradient(90deg, #c2410c, #fb923c)',
+        pattern: 'bar-striped',
+        border: '#fed7aa',
+        badgeBg: '#fff7ed',
+        badgeText: '#c2410c',
+        tag: 'ลู่วิ่งสปีดพลศึกษา'
+      },
+      {
+        id: 'agri',
+        name: 'คณะเทคโนโลยีและนวัตกรรมผลิตภัณฑ์การเกษตร',
+        short: 'AGRI',
+        campus: 'o',
+        eligible: 740,
+        voted: 473,
+        icon: '🌾',
+        gradient: 'linear-gradient(90deg, #4d7c0f, #a3e635)',
+        pattern: 'bar-wave',
+        border: '#d9f99d',
+        badgeBg: '#f7fee7',
+        badgeText: '#3f6212',
+        tag: 'รวงข้าวนวัตกรรม'
+      },
+      {
+        id: 'pt',
+        name: 'คณะกายภาพบำบัด',
+        short: 'PT',
+        campus: 'o',
+        eligible: 620,
+        voted: 403,
+        icon: '🩺',
+        gradient: 'linear-gradient(90deg, #0284c7, #38bdf8)',
+        pattern: 'bar-wave',
+        border: '#bae6fd',
+        badgeBg: '#f0f9ff',
+        badgeText: '#0369a1',
+        tag: 'คลื่นฟื้นฟูกายภาพ'
+      },
+      {
+        id: 'pharm',
+        name: 'คณะเภสัชศาสตร์',
+        short: 'PHARM',
+        campus: 'o',
+        eligible: 580,
+        voted: 382,
+        icon: '💊',
+        gradient: 'linear-gradient(90deg, #65a30d, #bef264)',
+        pattern: 'bar-dotted',
+        border: '#d9f99d',
+        badgeBg: '#f7fee7',
+        badgeText: '#4d7c0f',
+        tag: 'แคปซูลเขียวมะกอก'
+      },
+      {
+        id: 'nur',
+        name: 'คณะพยาบาลศาสตร์',
+        short: 'NURSE',
+        campus: 'o',
+        eligible: 960,
+        voted: 614,
+        icon: '🏥',
+        gradient: 'linear-gradient(90deg, #e11d48, #fda4af)',
+        pattern: 'bar-dotted',
+        border: '#fecdd3',
+        badgeBg: '#fff1f2',
+        badgeText: '#be123c',
+        tag: 'ชีพจรพยาบาล'
+      },
+      {
+        id: 'ahs',
+        name: 'คณะสหเวชศาสตร์',
+        short: 'AHS',
+        campus: 'o',
+        eligible: 820,
+        voted: 517,
+        icon: '🔬',
+        gradient: 'linear-gradient(90deg, #4338ca, #818cf8)',
+        pattern: 'bar-striped',
+        border: '#c7d2fe',
+        badgeBg: '#eef2ff',
+        badgeText: '#3730a3',
+        tag: 'แล็บสหเวชฯ'
+      }
+    ];
 
-    function getTotalVoted() {
-      return votedP + votedO;
+    const totalEligibleAll = faculties.reduce((sum, f) => sum + f.eligible, 0); // 29,339
+
+    function getCampusTotals(campus) {
+      const list = faculties.filter(f => f.campus === campus);
+      return {
+        eligible: list.reduce((s, f) => s + f.eligible, 0),
+        voted: list.reduce((s, f) => s + f.voted, 0)
+      };
     }
 
-    function formatCopy(template, A, B, gap, total, hours) {
-      return template
-        .replace(/\{A\}/g, A)
-        .replace(/\{B\}/g, B)
-        .replace(/\{gap\}/g, gap)
-        .replace(/\{total\}/g, total)
-        .replace(/\{hours\}/g, hours);
+    function getTotalVotedAll() {
+      return faculties.reduce((s, f) => s + f.voted, 0);
     }
-
-    // Gen Z Psychological Copy Library
-    const copyLibrary = {
-      behind: [
-        "ยอมโดนแซงเหรอแก?! ตามอยู่ {gap} คะแนนเองนะ 😤",
-        "{A} vs {B} อีกฝั่งจะนั่งมองเฉยๆ จริงดิ 👀",
-        "ศักดิ์ศรีไม่มีเหรอ ห่างแค่ {gap} ชวนเพื่อนมาโหวตเดี๋ยวนี้! 🔥",
-        "ถ้าแพ้ตอนนี้ จะตอบเพื่อนว่าไงอ่ะ ว่าไม่ว่างโหวต? 💀",
-        "ตามหลังแค่ {gap} คะแนน แต่ละคนที่ไม่โหวตคือแต้มที่เสียไปนะ",
-        "เขานำแล้ว แล้วแกยังจะนอนหลับทับสิทธิ์? 🛏️",
-        "ยังไม่สายนะ พลิกได้ถ้าแกกดโหวตตอนนี้ ⏰"
-      ],
-      leading: [
-        "นำอยู่ {gap} คะแนน แต่อย่าเพิ่งชิล เดี๋ยวโดนแซงน้า 😏",
-        "ใครว่าชนะแล้ว? อีกฝั่งกำลังไล่มาติดๆ 💀",
-        "นำก็ไม่ได้แปลว่ารอด ไปโหวตกันต่อ!",
-        "{gap} คะแนนไม่ได้เยอะอย่างที่คิด รีบเก็บเพิ่มก่อน",
-        "ที่ 1 วันนี้ ไม่ใช่ที่ 1 ตลอดไป ปิดโหวตอีก {hours} ชม.",
-        "อย่าให้ความมั่นใจพาแพ้ ชวนเพื่อนมาโหวตอีก 🫵"
-      ],
-      closeCall: [
-        "{A} : {B} ห่างกันแค่ {gap} 😱 ใจจะวาย",
-        "แค่ 1 โหวตก็พลิกได้ และอาจเป็นโหวตของแกนี่แหละ",
-        "ตอนนี้ใครก็ชนะได้ ขึ้นอยู่กับแกคนเดียว 🫵",
-        "สูสีขนาดนี้ ไม่โหวตนี่ไม่ไหวนะ",
-        "เส้นตายใกล้เข้ามาทุกวินาที คะแนนห่างแค่ {gap}!",
-        "ใครกดก่อน คนนั้นมีอำนาจ ⚡"
-      ],
-      fomo: [
-        "มีคนโหวตไปแล้ว {total} คน เหลือแกคนเดียวป่ะ 👀",
-        "ทั้งคณะโหวตกันหมดแล้ว แกยังอยู่ไหน?",
-        "{total} เสียงเลือกไปแล้ว เสียงของแกหายไปไหน 🫣",
-        "เพื่อนแกโหวตแล้วนะ เช็คสตอรี่ดูได้เลย",
-        "ไม่ได้โหวตคนเดียวนะแก ทุกคนกำลังกดอยู่ตอนนี้",
-        "ตอนนี้คนโหวตเพิ่มขึ้นทุกนาที อย่าเป็นคนสุดท้ายที่ไม่รู้เรื่อง 😭"
-      ],
-      lossAversion: [
-        "ไม่โหวตตอนนี้ ผลออกแล้วอย่ามาบ่นนะ 💅",
-        "ถ้าทีมแกแพ้แค่ {gap} คะแนน แกจะเสียใจมั้ย?",
-        "ปิดโหวตอีก {hours} ชม. พลาดแล้วย้อนไม่ได้ ⏰",
-        "สิทธิ์นี้ไม่ได้มีให้ทุกวัน อย่าปล่อยหลุดมือ",
-        "นายกคนนี้จะอยู่กับเราทั้งปี แกจะปล่อยให้คนอื่นเลือกแทนเหรอ?",
-        "เสียงเดียวของแกอาจเป็นเสียงที่ตัดสินทุกอย่าง"
-      ],
-      dare: [
-        "กล้าไม่โหวตมั้ยล่ะ? 😎",
-        "บอกว่ารักคณะ แต่ไม่โหวตเนี่ยนะ? 🤨",
-        "แค่ 30 วิ ยังไม่มีเวลาให้คณะตัวเองเหรอ",
-        "ใครโหวตแล้วยกมือขึ้น 🙋 แล้วแกอ่ะ?",
-        "เก่งแต่บ่น แต่ไม่ยอมโหวตใช่ป่ะ",
-        "ใครว่า Gen Z ไม่ใส่ใจ พิสูจน์ให้ดูหน่อย 💪"
-      ],
-      funny: [
-        "ประสานมิตร {A} 😎 องครักษ์ {B} 😤 คนที่ยังไม่โหวต 0 😴",
-        "คะแนนวิ่งเร็วกว่า Wi-Fi หอ แกยังไม่กดอีก 🏃",
-        "ผลตอนนี้ {A}-{B} ส่วนแกอยู่ฝั่ง \"ยังไม่ได้ทำ\" 🫠",
-        "นอนต่ออีกนิด... ไม่ได้! ตื่นมาโหวตก่อน ☕",
-        "ดูคะแนนเพลิน แต่ลืมกดโหวตใช่ป่ะ 🤭",
-        "ไปเลือกชานมได้ใน 1 นาที เลือกนายกฯ ก็ใช้เวลาเท่ากัน 🧋"
-      ],
-      ticker: [
-        "🔴 LIVE | ประสานมิตร {A} • องครักษ์ {B} • ห่าง {gap}",
-        "📊 {A} vs {B} ใครจะแซง? โหวตเลย",
-        "⚡ คะแนนเปลี่ยนทุกนาที กดก่อนโดนแซง",
-        "🔥 สนามร้อนแล้ว! ห่างกัน {gap} คะแนน",
-        "⏳ เหลือ {hours} ชม. | {total} โหวตแล้ว",
-        "🚨 ใครนำ? ใครตาม? ขึ้นอยู่กับแก"
-      ],
-      leadChangeO: [
-        "🚨 องครักษ์แซงแล้ว! ประสานมิตรจะตอบโต้ยังไง?",
-        "😱 สลับกันนำอีกรอบ ใครจะอยู่ได้นานกว่า?",
-        "⚡ แซงปุ๊บ โดนแซงกลับปั๊บ สูสีสุดๆ"
-      ],
-      leadChangeP: [
-        "🔄 ประสานมิตรแซงกลับ! สนามพลิกอีกแล้ว",
-        "😱 สลับกันนำอีกรอบ ใครจะอยู่ได้นานกว่า?",
-        "⚡ แซงปุ๊บ โดนแซงกลับปั๊บ สูสีสุดๆ"
-      ]
-    };
 
     function addLog(msg, type = 'INFO') {
       const logBox = document.getElementById('system-log');
@@ -866,130 +1038,138 @@
       }, 60);
     }
 
-    function rotateGenZCopy(forcedAlert = null) {
-      copyIndex++;
-      const totalV = getTotalVoted();
-      const pctP = ((votedP / totalP) * 100).toFixed(2);
-      const pctO = ((votedO / totalO) * 100).toFixed(2);
-      const gapPct = Math.abs(parseFloat(pctP) - parseFloat(pctO)).toFixed(2) + '%';
-      const A = pctP + '%';
-      const B = pctO + '%';
-      const totalStr = totalV.toLocaleString();
-      const hours = '3';
+    function renderFacultyLists(animateBars = true) {
+      const pContainer = document.getElementById('faculty-list-prasarnmit');
+      const oContainer = document.getElementById('faculty-list-ongkharak');
 
-      // Update Live Tickers
-      const tickerTpl = copyLibrary.ticker[copyIndex % copyLibrary.ticker.length];
-      const tickerText = formatCopy(tickerTpl, A, B, gapPct, totalStr, hours);
-      document.getElementById('step2-ticker').textContent = tickerText;
-      document.getElementById('step4-ticker').textContent = tickerText;
+      function buildUniqueFacultyBar(f) {
+        const pct = ((f.voted / f.eligible) * 100).toFixed(2);
+        const barWidth = animateBars ? Math.min(100, pct) : 0;
+        const runnerLeft = animateBars ? Math.min(91, Math.max(2, pct)) : 2;
 
-      // Step 2 Nudge Pool (FOMO, Loss Aversion, Dare, Funny)
-      const step2Categories = [
-        { tag: `FOMO • โหวตแล้ว ${totalStr} คน`, list: copyLibrary.fomo },
-        { tag: 'LOSS AVERSION • อย่าปล่อยผ่าน', list: copyLibrary.lossAversion },
-        { tag: 'ท้าทาย • 30 วิเท่านั้น', list: copyLibrary.dare },
-        { tag: 'กวนๆ • ปลุกไปโหวต', list: copyLibrary.funny }
-      ];
-      const s2Pick = step2Categories[copyIndex % step2Categories.length];
-      const s2Tpl = s2Pick.list[copyIndex % s2Pick.list.length];
-      document.getElementById('step2-nudge-badge').textContent = s2Pick.tag;
-      document.getElementById('step2-nudge-text').textContent = formatCopy(s2Tpl, A, B, gapPct, totalStr, hours);
+        return `
+          <div class="rounded-2xl p-2.5 bg-white shadow-xs transition" style="border: 1.5px solid ${f.border};">
+            <div class="flex items-start justify-between gap-2 mb-1">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shrink-0" style="background:${f.badgeBg}; color:${f.badgeText};">
+                    ${f.short}
+                  </span>
+                  <p class="text-[11px] font-bold text-slate-800 truncate">${f.name}</p>
+                </div>
+                <p class="text-[9.5px] text-slate-400 mt-0.5">${f.tag} • ใช้สิทธิ ${f.voted.toLocaleString()} / ${f.eligible.toLocaleString()} คน</p>
+              </div>
+              <span class="text-xs font-extrabold shrink-0" style="color:${f.badgeText};">${pct}%</span>
+            </div>
 
-      // Step 4 Rivalry / Alert Pool
-      const tagEl = document.getElementById('rivalry-tag');
-      const msgEl = document.getElementById('rivalry-tension-msg');
-      const boxEl = document.getElementById('rivalry-box');
+            <!-- Unique Track + Moving Faculty Runner -->
+            <div class="relative pt-3 pb-0.5">
+              <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/70">
+                <div class="h-full rounded-full transition-all duration-700 ease-out ${f.pattern}"
+                     style="width: ${barWidth}%; background-image: ${f.gradient};">
+                </div>
+              </div>
 
-      if (forcedAlert === 'O_LEAD') {
-        const alertTpl = copyLibrary.leadChangeO[copyIndex % copyLibrary.leadChangeO.length];
-        tagEl.textContent = 'ALERT • คะแนนเปลี่ยนมือ!';
-        tagEl.className = 'text-[10px] font-extrabold bg-amber-500 text-slate-900 px-2 py-0.5 rounded-full animate-bounce';
-        boxEl.className = 'bg-amber-50 border-2 border-amber-400 rounded-2xl p-3 space-y-1.5';
-        msgEl.className = 'text-xs font-extrabold text-slate-900 leading-snug';
-        msgEl.textContent = formatCopy(alertTpl, A, B, gapPct, totalStr, hours);
-        return;
+              <!-- Running Faculty Mascot/Icon -->
+              <div class="absolute -top-0.5 transition-all duration-700 ease-out pointer-events-none runner-badge"
+                   style="left: calc(${runnerLeft}% - 10px);">
+                <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-sm text-xs border"
+                      style="border-color: ${f.badgeText};">
+                  ${f.icon}
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
       }
 
-      if (forcedAlert === 'P_LEAD') {
-        const alertTpl = copyLibrary.leadChangeP[copyIndex % copyLibrary.leadChangeP.length];
-        tagEl.textContent = 'ALERT • แซงกลับแล้ว!';
-        tagEl.className = 'text-[10px] font-extrabold bg-red-600 text-white px-2 py-0.5 rounded-full animate-bounce';
-        boxEl.className = 'bg-red-50 border-2 border-red-400 rounded-2xl p-3 space-y-1.5';
-        msgEl.className = 'text-xs font-extrabold text-red-900 leading-snug';
-        msgEl.textContent = formatCopy(alertTpl, A, B, gapPct, totalStr, hours);
-        return;
-      }
+      pContainer.innerHTML = faculties
+        .filter(f => f.campus === 'p')
+        .map(f => buildUniqueFacultyBar(f))
+        .join('');
 
-      const diffNum = Math.abs(parseFloat(pctP) - parseFloat(pctO));
-      const step4Categories = diffNum < 1.0
-        ? [
-            { tag: 'สูสีจนใจสั่น 🔥', list: copyLibrary.closeCall },
-            { tag: 'ยอมเหรอ (ฝั่งตามหลัง)', list: copyLibrary.behind },
-            { tag: 'อย่าประมาท (ฝั่งนำ)', list: copyLibrary.leading }
-          ]
-        : [
-            { tag: 'ยอมเหรอ (ฝั่งตามหลัง)', list: copyLibrary.behind },
-            { tag: 'อย่าประมาท (ฝั่งนำ)', list: copyLibrary.leading },
-            { tag: 'กวนๆ • ศึกสองวิทยาเขต', list: copyLibrary.funny },
-            { tag: 'LOSS AVERSION • ห่างแค่นี้', list: copyLibrary.lossAversion }
-          ];
-
-      const s4Pick = step4Categories[copyIndex % step4Categories.length];
-      const s4Tpl = s4Pick.list[copyIndex % s4Pick.list.length];
-
-      tagEl.textContent = s4Pick.tag;
-      tagEl.className = 'text-[10px] font-extrabold bg-red-600 text-white px-2 py-0.5 rounded-full';
-      boxEl.className = 'bg-red-50 border border-red-200 rounded-2xl p-3 space-y-1.5';
-      msgEl.className = 'text-xs font-bold text-red-900 leading-snug';
-      msgEl.textContent = formatCopy(s4Tpl, A, B, gapPct, totalStr, hours);
+      oContainer.innerHTML = faculties
+        .filter(f => f.campus === 'o')
+        .map(f => buildUniqueFacultyBar(f))
+        .join('');
     }
 
-    function updateRivalryUI(animateBars = true) {
-      const totalV = getTotalVoted();
-      const pctAll = ((totalV / totalAll) * 100).toFixed(2);
-      const pctP = ((votedP / totalP) * 100).toFixed(2);
-      const pctO = ((votedO / totalO) * 100).toFixed(2);
+    function rotateFactData() {
+      factIndex++;
+      const totalV = getTotalVotedAll();
+      const remainingV = Math.max(0, totalEligibleAll - totalV);
+      const pctAll = ((totalV / totalEligibleAll) * 100).toFixed(2);
+
+      const pTot = getCampusTotals('p');
+      const oTot = getCampusTotals('o');
+      const pctP = ((pTot.voted / pTot.eligible) * 100).toFixed(2);
+      const pctO = ((oTot.voted / oTot.eligible) * 100).toFixed(2);
+      const gapPct = Math.abs(parseFloat(pctP) - parseFloat(pctO)).toFixed(2);
+
+      const topFac = [...faculties].sort((a, b) => (b.voted / b.eligible) - (a.voted / a.eligible))[0];
+      const topPct = ((topFac.voted / topFac.eligible) * 100).toFixed(2);
+
+      const tickerLines = [
+        `ใช้สิทธิ ป.ตรี แล้ว ${totalV.toLocaleString()} / ${totalEligibleAll.toLocaleString()} คน (${pctAll}%) • เลือกตั้ง 30 ธ.ค. 69`,
+        `ประสานมิตร ป.ตรี ${pctP}% (${pTot.voted.toLocaleString()}/${pTot.eligible.toLocaleString()}) • องครักษ์ ป.ตรี ${pctO}% (${oTot.voted.toLocaleString()}/${oTot.eligible.toLocaleString()})`,
+        `คณะที่เปอร์เซ็นต์สูงสุดตอนนี้: ${topFac.name} (${topPct}%) • คงเหลือผู้มีสิทธิอีก ${remainingV.toLocaleString()} คน`
+      ];
+      document.getElementById('step2-ticker').textContent = tickerLines[factIndex % tickerLines.length];
+
+      const s2Lines = [
+        {
+          badge: 'ฐานผู้มีสิทธิ ป.ตรี',
+          text: `คำนวณจากนิสิตทั้งหมด 32,832 คน หัก ป.โท (2,262), ป.เอก (1,100) และ ป.บัตรฯ (96) คงเหลือผู้มีสิทธิ ป.ตรี 29,339 คน`
+        },
+        {
+          badge: 'ยอดใช้สิทธิปัจจุบัน',
+          text: `มาใช้สิทธิแล้ว ${totalV.toLocaleString()} คน จาก 29,339 คน (${pctAll}%) ยังไม่มาใช้สิทธิอีก ${remainingV.toLocaleString()} คน`
+        },
+        {
+          badge: 'วันลงคะแนน',
+          text: `กำหนดวันเลือกตั้ง 30 ธันวาคม 2569 แยกฐานผู้มีสิทธิระดับปริญญาตรีเฉพาะ 16 คณะ/วิทยาลัย`
+        }
+      ];
+      const pickS2 = s2Lines[factIndex % s2Lines.length];
+      document.getElementById('step2-fact-badge').textContent = pickS2.badge;
+      document.getElementById('step2-fact-text').textContent = pickS2.text;
+
+      const s4Lines = [
+        `ประสานมิตรอยู่ที่ ${pctP}% และองครักษ์อยู่ที่ ${pctO}% (ส่วนต่าง ${gapPct}%)`,
+        `อันดับ 1 รายคณะตอนนี้คือ ${topFac.name} ที่ ${topPct}% (${topFac.voted.toLocaleString()}/${topFac.eligible.toLocaleString()} คน)`,
+        `มาใช้สิทธิแล้ว ${totalV.toLocaleString()} คน จากผู้มีสิทธิ ป.ตรี 29,339 คน (เหลืออีก ${remainingV.toLocaleString()} คน)`
+      ];
+      document.getElementById('fact-tension-msg').textContent = s4Lines[factIndex % s4Lines.length];
+    }
+
+    function updateTurnoutUI(animateBars = true) {
+      const totalV = getTotalVotedAll();
+      const pctAll = ((totalV / totalEligibleAll) * 100).toFixed(2);
+
+      const pTot = getCampusTotals('p');
+      const oTot = getCampusTotals('o');
+      const pctP = ((pTot.voted / pTot.eligible) * 100).toFixed(2);
+      const pctO = ((oTot.voted / oTot.eligible) * 100).toFixed(2);
 
       document.getElementById('stat-voted').textContent = totalV.toLocaleString();
       document.getElementById('stat-percent').textContent = pctAll;
       document.getElementById('nudge-pct').textContent = pctAll;
 
-      document.getElementById('pct-p').textContent = pctP;
-      document.getElementById('num-p').textContent = votedP.toLocaleString();
-      document.getElementById('pct-o').textContent = pctO;
-      document.getElementById('num-o').textContent = votedO.toLocaleString();
+      document.getElementById('pct-campus-p').textContent = pctP + '%';
+      document.getElementById('voted-campus-p').textContent = pTot.voted.toLocaleString();
+      document.getElementById('elig-campus-p').textContent = pTot.eligible.toLocaleString();
 
-      const diffPct = Math.abs(parseFloat(pctP) - parseFloat(pctO)).toFixed(2);
-      const badgeP = document.getElementById('badge-p');
-      const badgeO = document.getElementById('badge-o');
-
-      const currentLeader = parseFloat(pctP) >= parseFloat(pctO) ? 'P' : 'O';
-      let leadChangedAlert = null;
-      if (currentLeader !== lastLeader) {
-        leadChangedAlert = currentLeader === 'O' ? 'O_LEAD' : 'P_LEAD';
-        lastLeader = currentLeader;
-      }
-
-      if (currentLeader === 'P') {
-        badgeP.textContent = 'นำอยู่';
-        badgeP.className = 'text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded';
-        badgeO.textContent = `ตามหลัง ${diffPct}%`;
-        badgeO.className = 'text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
-      } else {
-        badgeO.textContent = 'แซงนำแล้ว!';
-        badgeO.className = 'text-[10px] bg-slate-800 text-white px-1.5 py-0.5 rounded';
-        badgeP.textContent = `ตามหลัง ${diffPct}%`;
-        badgeP.className = 'text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
-      }
-
-      rotateGenZCopy(leadChangedAlert);
+      document.getElementById('pct-campus-o').textContent = pctO + '%';
+      document.getElementById('voted-campus-o').textContent = oTot.voted.toLocaleString();
+      document.getElementById('elig-campus-o').textContent = oTot.eligible.toLocaleString();
 
       if (animateBars) {
         document.getElementById('overall-turnout-bar').style.width = Math.min(95, pctAll) + '%';
         document.getElementById('turnout-pusher').style.left = `calc(${Math.min(92, pctAll)}% - 12px)`;
-        document.getElementById('bar-prasarnmit').style.width = Math.min(100, pctP) + '%';
-        document.getElementById('bar-ongkharak').style.width = Math.min(100, pctO) + '%';
       }
+
+      renderFacultyLists(animateBars);
+      rotateFactData();
     }
 
     function showStep(step) {
@@ -1006,14 +1186,14 @@
       } else if (step === 2) {
         document.getElementById('view-step-2').classList.remove('hidden');
         subtitle.textContent = 'ขั้นที่ 2/4: แจ้งเตือนข้อมูลเลือกตั้ง (Wi-vote)';
-        updateRivalryUI(false);
+        updateTurnoutUI(false);
       } else if (step === 3) {
         document.getElementById('view-step-3').classList.remove('hidden');
         subtitle.textContent = 'ขั้นที่ 3/4: ลงคะแนนผ่านระบบ SUPREME';
       } else if (step === 4) {
         document.getElementById('view-step-4').classList.remove('hidden');
-        subtitle.textContent = 'ขั้นที่ 4/4: ยืนยันการใช้สิทธิและสถิติ';
-        setTimeout(() => updateRivalryUI(true), 120);
+        subtitle.textContent = 'ขั้นที่ 4/4: แถบวิ่งรายงานรายคณะ (30 ธ.ค.)';
+        setTimeout(() => updateTurnoutUI(true), 120);
       }
     }
 
@@ -1025,7 +1205,7 @@
       views.forEach(id => document.getElementById(id).classList.add('hidden'));
       document.getElementById('view-loading').classList.remove('hidden');
 
-      addLog(`ตรวจสอบ Buasri ID: ${userVal} กับระบบเครือข่าย`, 'INFO');
+      addLog(`ตรวจสอบ Buasri ID: ${userVal} (ระดับปริญญาตรี)`, 'INFO');
 
       setTimeout(() => {
         if (hasVoted) {
@@ -1038,7 +1218,6 @@
           hasSeenNotice = true;
           updateStateBadges();
           addLog('ตรวจพบสถานะ: "ยังไม่ใช้สิทธิ" -> แสดงหน้า Wi-vote Landing Page', 'INFO');
-          addLog('บันทึกสถานะการรับทราบ (Seen = True) แบบไม่กีดกันเน็ต', 'PRIVACY');
           showStep(2);
         }
       }, 900);
@@ -1074,14 +1253,20 @@
     }
 
     function boostCampus(campus, amount) {
-      if (campus === 'p') {
-        votedP = Math.min(totalP, votedP + amount);
-        addLog(`เด็กอโศก (ประสานมิตร) กดเพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
-      } else {
-        votedO = Math.min(totalO, votedO + amount);
-        addLog(`เด็กนครนายก (องครักษ์) กดเพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
+      const targetFaculties = faculties.filter(f => f.campus === campus);
+      let added = 0;
+      let idx = 0;
+      while (added < amount && targetFaculties.some(f => f.voted < f.eligible)) {
+        const fac = targetFaculties[idx % targetFaculties.length];
+        if (fac.voted < fac.eligible) {
+          fac.voted++;
+          added++;
+        }
+        idx++;
       }
-      updateRivalryUI(true);
+      const label = campus === 'p' ? 'เด็กอโศก (ประสานมิตร)' : 'เด็กนครนายก (องครักษ์)';
+      addLog(`${label} เพิ่มยอดผู้ใช้สิทธิ +${added} คน`, 'INFO');
+      updateTurnoutUI(true);
     }
 
     function submitVote() {
@@ -1089,38 +1274,20 @@
 
       hasVoted = true;
       hasSeenNotice = true;
-      votedP = Math.min(totalP, votedP + 1);
-      updateStateBadges();
 
-      document.getElementById('receipt-ref').textContent = 'SWU-2026-' + Math.floor(1000 + Math.random() * 9000);
-      document.getElementById('bar-prasarnmit').style.width = '0%';
-      document.getElementById('bar-ongkharak').style.width = '0%';
+      const socFac = faculties.find(f => f.id === 'soc');
+      if (socFac && socFac.voted < socFac.eligible) {
+        socFac.voted += 1;
+      }
+
+      updateStateBadges();
       document.getElementById('overall-turnout-bar').style.width = '0%';
       document.getElementById('turnout-pusher').style.left = '0%';
 
-      addLog('บันทึกบัตรลงคะแนนลงหีบอิเล็กทรอนิกส์ (ไม่ระบุตัวตนผู้เลือก)', 'PRIVACY');
+      addLog('บันทึกบัตรลงคะแนนเรียบร้อย (ไม่ระบุตัวตนผู้เลือก)', 'PRIVACY');
       addLog('อัปเดตสถานะใน Wi-vote เป็น Voted = True เรียบร้อย', 'SUCCESS');
 
       showStep(4);
-    }
-
-    function selectFeedback(score, btnEl) {
-      selectedRating = score;
-      document.querySelectorAll('.emoji-btn').forEach(b => {
-        b.classList.remove('bg-amber-100', 'border-amber-400', 'scale-110');
-      });
-      btnEl.classList.add('bg-amber-100', 'border-amber-400', 'scale-110');
-    }
-
-    function sendFeedback() {
-      const txt = document.getElementById('feedback-text').value.trim();
-      addLog(`ได้รับผลประเมินความพึงพอใจ: ${selectedRating || 5}/5 ดาว ${txt ? '(' + txt + ')' : ''}`, 'SUCCESS');
-      document.getElementById('feedback-box').innerHTML = `
-        <div class="text-center py-2 space-y-1">
-          <p class="text-xs font-bold text-emerald-700">🙏 ขอบคุณสำหรับความคิดเห็น!</p>
-          <p class="text-[11px] text-slate-500">ข้อมูลถูกนำไปพัฒนาการประชาสัมพันธ์การเลือกตั้ง มศว</p>
-        </div>
-      `;
     }
 
     function simulateReconnectWifi() {
@@ -1132,15 +1299,20 @@
       hasSeenNotice = false;
       hasVoted = false;
       selectedCandidate = null;
-      votedP = 7980;
-      votedO = 5940;
-      lastLeader = 'P';
+      const initialVoted = {
+        bsm: 2210, econ: 1142, fofa: 1621, env: 983, cosci: 1754,
+        swis: 871, cci: 1247, hum: 2762, soc: 2624,
+        eng: 1202, pe: 739, agri: 473, pt: 403, pharm: 382, nur: 614, ahs: 517
+      };
+      faculties.forEach(f => {
+        f.voted = initialVoted[f.id] ?? f.voted;
+      });
       document.getElementById('input-buasri').value = '';
       document.getElementById('input-pass').value = '';
       document.getElementById('check-user').classList.add('hidden');
       document.getElementById('check-pass').classList.add('hidden');
       updateStateBadges();
-      addLog('รีเซ็ตสถานะทั้งหมดกลับสู่ค่าเริ่มต้นแล้ว', 'INFO');
+      addLog('รีเซ็ตสถานะและสถิติรายคณะกลับสู่ค่าเริ่มต้นแล้ว', 'INFO');
       showStep(1);
     }
   </script>
