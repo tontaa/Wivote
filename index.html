@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       font-family: 'Kanit', sans-serif;
@@ -21,7 +21,6 @@
       color: #1e293b;
       min-height: 100dvh;
     }
-    /* Safe area for iPhone notch & Safari bottom bar */
     .safe-top {
       padding-top: max(0.5rem, env(safe-area-inset-top));
     }
@@ -66,6 +65,54 @@
     .step-active-pop {
       animation: popBounce 0.35s ease-out forwards;
     }
+
+    /* SVG Character Dance / Jog & Push Animations */
+    @keyframes runnerDance {
+      0%, 100% { transform: translateY(0px) rotate(-4deg); }
+      25% { transform: translateY(-4px) rotate(4deg); }
+      50% { transform: translateY(-1px) rotate(-3deg); }
+      75% { transform: translateY(-4px) rotate(5deg); }
+    }
+    .runner-dance {
+      animation: runnerDance 0.5s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes pusherLean {
+      0%, 100% { transform: translateX(0px) rotate(12deg); }
+      50% { transform: translateX(3px) rotate(18deg); }
+    }
+    .pusher-lean {
+      animation: pusherLean 0.6s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes legSwingA {
+      0%, 100% { transform: rotate(-24deg); }
+      50% { transform: rotate(24deg); }
+    }
+    @keyframes legSwingB {
+      0%, 100% { transform: rotate(24deg); }
+      50% { transform: rotate(-24deg); }
+    }
+    @keyframes armWave {
+      0%, 100% { transform: rotate(-18deg); }
+      50% { transform: rotate(22deg); }
+    }
+    .leg-a {
+      animation: legSwingA 0.5s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: top center;
+    }
+    .leg-b {
+      animation: legSwingB 0.5s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: top center;
+    }
+    .arm-wave {
+      animation: armWave 0.5s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: left center;
+    }
+
     .custom-scroll::-webkit-scrollbar {
       width: 4px;
     }
@@ -83,7 +130,7 @@
     <!-- LEFT COLUMN: Mobile App Experience -->
     <div class="w-full md:w-[412px] shrink-0 bg-white md:rounded-3xl md:shadow-xl md:border md:border-slate-200 flex flex-col min-h-[100dvh] md:min-h-[780px] overflow-hidden">
 
-      <!-- Unified Sticky Top Stack (Disclaimer + App Header + Animated Progress Stepper) -->
+      <!-- Unified Sticky Top Stack -->
       <div class="sticky top-0 z-30 bg-white shadow-sm">
         <!-- Academic Disclaimer Banner -->
         <div class="bg-slate-900 text-slate-200 px-3 py-1.5 text-center safe-top">
@@ -145,13 +192,34 @@
           </button>
         </header>
 
-        <!-- Animated Election Progress Stepper -->
-        <div class="bg-slate-50/90 px-4 py-2.5 border-b border-slate-100">
+        <!-- Animated Election Progress Stepper with Dancing/Running Character -->
+        <div class="bg-slate-50/95 px-4 pt-5 pb-2.5 border-b border-slate-100">
           <div class="relative flex items-center justify-between">
             <!-- Background Track -->
-            <div class="absolute left-4 right-4 top-3.5 h-1 bg-slate-200 rounded-full -z-0"></div>
+            <div class="absolute left-4 right-4 top-3.5 h-1.5 bg-slate-200 rounded-full -z-0"></div>
             <!-- Animated Fill Track -->
-            <div id="progress-track" class="absolute left-4 top-3.5 h-1 progress-shimmer rounded-full transition-all duration-700 ease-out -z-0" style="width: 0%;"></div>
+            <div id="progress-track" class="absolute left-4 top-3.5 h-1.5 progress-shimmer rounded-full transition-all duration-700 ease-out -z-0" style="width: 4%;"></div>
+
+            <!-- Tiny Dancing / Running SVG Character Following Progress -->
+            <div id="stepper-runner" class="absolute -top-4 z-20 transition-all duration-700 ease-out pointer-events-none" style="left: 4%;">
+              <svg width="26" height="28" viewBox="0 0 36 40" class="runner-dance drop-shadow-sm" xmlns="http://www.w3.org/2000/svg">
+                <!-- Head -->
+                <circle cx="18" cy="8" r="5.5" fill="#dc2626"/>
+                <!-- Happy Face -->
+                <circle cx="19.8" cy="7.2" r="0.9" fill="#ffffff"/>
+                <path d="M18 9.8 Q19.8 11 21.2 9.5" stroke="#ffffff" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                <!-- Body -->
+                <line x1="18" y1="13.5" x2="18" y2="25" stroke="#1e293b" stroke-width="3.2" stroke-linecap="round"/>
+                <!-- Dancing / Cheering Arms -->
+                <path d="M18 16 L11 11" stroke="#1e293b" stroke-width="2.6" stroke-linecap="round" class="arm-wave"/>
+                <path d="M18 16 L26 11" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round" class="arm-wave"/>
+                <!-- Tiny Flag / Vote Card in Hand -->
+                <rect x="24" y="6" width="6" height="5" rx="1" fill="#f59e0b" class="arm-wave"/>
+                <!-- Running Legs -->
+                <line x1="18" y1="25" x2="13" y2="35" stroke="#1e293b" stroke-width="2.8" stroke-linecap="round" class="leg-a"/>
+                <line x1="18" y1="25" x2="23" y2="35" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" class="leg-b"/>
+              </svg>
+            </div>
 
             <!-- Step Node 1 -->
             <div class="relative z-10 flex flex-col items-center gap-1">
@@ -279,6 +347,38 @@
                 <p class="text-red-100 text-[11px]">ลงคะแนนออนไลน์ผ่านระบบ SUPREME</p>
               </div>
             </div>
+          </div>
+
+          <!-- Social Proof Turnout Nudging Banner (Pusher Character) -->
+          <div class="bg-amber-50/90 border border-amber-200/90 rounded-2xl p-3 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+                <span class="text-xs font-bold text-slate-800">เพื่อนชาว มศว มาใช้สิทธิแล้ว <span id="nudge-count" class="text-red-600">14,285</span> คน!</span>
+              </div>
+              <span class="text-xs font-extrabold text-red-600"><span id="nudge-pct">68.02</span>%</span>
+            </div>
+
+            <!-- Bar with Tiny Character Pushing the Progress -->
+            <div class="relative pt-3 pb-0.5">
+              <div class="w-full bg-amber-200/70 h-2.5 rounded-full overflow-hidden">
+                <div id="nudge-bar" class="bg-gradient-to-r from-red-600 to-amber-500 h-2.5 rounded-full transition-all duration-700" style="width: 68.02%;"></div>
+              </div>
+              <!-- Character Pushing the Bar -->
+              <div id="nudge-pusher" class="absolute -top-1.5 transition-all duration-700 pointer-events-none" style="left: calc(68.02% - 14px);">
+                <svg width="24" height="24" viewBox="0 0 36 36" class="pusher-lean" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="20" cy="8" r="5" fill="#dc2626"/>
+                  <line x1="18" y1="13" x2="14" y2="24" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                  <!-- Arms Pushing Forward -->
+                  <line x1="17" y1="16" x2="28" y2="15" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round"/>
+                  <line x1="16" y1="18" x2="27" y2="18" stroke="#1e293b" stroke-width="2.6" stroke-linecap="round"/>
+                  <!-- Striding Legs -->
+                  <line x1="14" y1="24" x2="8" y2="33" stroke="#1e293b" stroke-width="2.8" stroke-linecap="round" class="leg-a"/>
+                  <line x1="14" y1="24" x2="20" y2="33" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" class="leg-b"/>
+                </svg>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-600">อีกนิดเดียวจะทะลุเป้า 70% มาร่วมเป็นส่วนหนึ่งในการกำหนดทิศทาง มศว กัน!</p>
           </div>
 
           <!-- Candidates Quick Preview -->
@@ -435,18 +535,18 @@
             <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center text-lg mx-auto shadow-sm step-active-pop">✓</div>
             <h2 class="text-base font-bold text-emerald-900">บันทึกการใช้สิทธิเรียบร้อยแล้ว</h2>
             <p class="text-[11px] text-emerald-700">
-              อัปเดตสถานะ <strong>"ใช้สิทธิแล้ว"</strong> (ไม่บันทึกข้อมูลผู้สมัครที่เลือก)
+              ขอบคุณที่เป็น 1 เสียงสำคัญในการขับเคลื่อน มศว!
             </p>
             <div class="inline-block bg-white border border-emerald-200 rounded-xl px-2.5 py-0.5 text-[10px] text-slate-500">
               Ref ID: <span id="receipt-ref" class="font-mono font-semibold text-slate-700">SWU-2026-8849</span>
             </div>
           </div>
 
-          <!-- Real-Time Turnout Mockup Dashboard -->
+          <!-- Real-Time Turnout Mockup Dashboard with Pushing Character -->
           <div class="bg-slate-50 border border-slate-200 rounded-3xl p-3.5 space-y-2.5">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                📊 สถิติผู้มาใช้สิทธิเลือกตั้ง (Mockup)
+                📊 พลังเสียงนิสิต มศว (Turnout Mockup)
               </h3>
               <span class="text-[10px] bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full animate-pulse">LIVE</span>
             </div>
@@ -455,17 +555,37 @@
               <div class="bg-white p-2.5 rounded-2xl border border-slate-100">
                 <p class="text-[11px] text-slate-500">ผู้ใช้สิทธิแล้วทั้งหมด</p>
                 <p class="text-xl font-extrabold text-red-600 mt-0.5"><span id="stat-voted">14,286</span></p>
-                <p class="text-[10px] text-emerald-600 font-medium">+1 คน (รวมคุณแล้ว)</p>
+                <p class="text-[10px] text-emerald-600 font-medium">+1 เสียงของคุณแล้ว!</p>
               </div>
               <div class="bg-white p-2.5 rounded-2xl border border-slate-100">
                 <p class="text-[11px] text-slate-500">สัดส่วนผู้มาใช้สิทธิ</p>
                 <p class="text-xl font-extrabold text-slate-800 mt-0.5"><span id="stat-percent">68.03</span>%</p>
-                <p class="text-[10px] text-slate-400">จากผู้มีสิทธิ 21,000 คน</p>
+                <p class="text-[10px] text-slate-400">เป้าหมาย 70% (14,700 คน)</p>
+              </div>
+            </div>
+
+            <!-- Overall Progress Bar with Pushing Character -->
+            <div class="pt-3">
+              <div class="relative">
+                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                  <div id="overall-turnout-bar" class="progress-shimmer h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                </div>
+                <!-- Character Pushing Turnout Bar -->
+                <div id="turnout-pusher" class="absolute -top-4 transition-all duration-1000 ease-out pointer-events-none" style="left: 0%;">
+                  <svg width="26" height="26" viewBox="0 0 36 36" class="pusher-lean" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="8" r="5" fill="#dc2626"/>
+                    <line x1="18" y1="13" x2="14" y2="24" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="17" y1="16" x2="28" y2="15" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="16" y1="18" x2="27" y2="18" stroke="#1e293b" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="14" y1="24" x2="8" y2="33" stroke="#1e293b" stroke-width="2.8" stroke-linecap="round" class="leg-a"/>
+                    <line x1="14" y1="24" x2="20" y2="33" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" class="leg-b"/>
+                  </svg>
+                </div>
               </div>
             </div>
 
             <!-- Animated Campus Breakdown Bars -->
-            <div class="space-y-2 pt-0.5">
+            <div class="space-y-2 pt-1">
               <div>
                 <div class="flex justify-between text-[11px] mb-1">
                   <span class="text-slate-600 font-medium">วิทยาเขตประสานมิตร</span>
@@ -485,6 +605,11 @@
                 </div>
               </div>
             </div>
+
+            <!-- Quick Cheer / Invite Button -->
+            <button onclick="boostTurnoutDemo()" class="w-full bg-amber-100 active:bg-amber-200 text-amber-900 font-semibold text-xs py-2 rounded-xl transition">
+              🔥 จำลองเพื่อนมาใช้สิทธิเพิ่ม (+50 คน)
+            </button>
           </div>
 
           <!-- User Satisfaction Feedback -->
@@ -512,7 +637,7 @@
           </button>
         </section>
 
-        <!-- Bottom App Footer Disclaimer (Inside Flow so Safari Bar Never Covers Content) -->
+        <!-- Bottom App Footer Disclaimer -->
         <footer class="pt-4 mt-2 border-t border-slate-100 text-center safe-bottom">
           <p class="text-[10px] text-slate-400 leading-snug">
             SWU Wi-vote Prototype • วิชา PO401 Seminar in Political Science Issues for Sustainable Development
@@ -610,11 +735,15 @@
       panel.classList.toggle('flex');
     }
 
-    // Update Animated Stepper Progress Bar
+    // Update Animated Stepper Progress Bar + Dancing Runner Character Position
     function updateStepper(activeStep) {
       const track = document.getElementById('progress-track');
-      const widths = { 1: '0%', 2: '31%', 3: '63%', 4: '92%' };
-      track.style.width = widths[activeStep] || '0%';
+      const runner = document.getElementById('stepper-runner');
+      const trackWidths = { 1: '4%', 2: '31%', 3: '63%', 4: '90%' };
+      const runnerPositions = { 1: '4%', 2: '31%', 3: '62%', 4: '88%' };
+
+      track.style.width = trackWidths[activeStep] || '4%';
+      runner.style.left = runnerPositions[activeStep] || '4%';
 
       for (let i = 1; i <= 4; i++) {
         const node = document.getElementById(`node-${i}`);
@@ -691,6 +820,11 @@
       } else if (step === 2) {
         document.getElementById('view-step-2').classList.remove('hidden');
         subtitle.textContent = 'ขั้นที่ 2/4: แจ้งเตือนข้อมูลเลือกตั้ง (Wi-vote)';
+        const pct = ((votedCount / totalEligible) * 100).toFixed(2);
+        document.getElementById('nudge-count').textContent = votedCount.toLocaleString();
+        document.getElementById('nudge-pct').textContent = pct;
+        document.getElementById('nudge-bar').style.width = pct + '%';
+        document.getElementById('nudge-pusher').style.left = `calc(${pct}% - 14px)`;
       } else if (step === 3) {
         document.getElementById('view-step-3').classList.remove('hidden');
         subtitle.textContent = 'ขั้นที่ 3/4: ลงคะแนนผ่านระบบ SUPREME';
@@ -762,6 +896,8 @@
       const startCount = targetCount - 35;
       const statEl = document.getElementById('stat-voted');
       const percentEl = document.getElementById('stat-percent');
+      const overallBar = document.getElementById('overall-turnout-bar');
+      const turnoutPusher = document.getElementById('turnout-pusher');
       let current = startCount;
 
       const counter = setInterval(() => {
@@ -770,14 +906,27 @@
           current = targetCount;
           clearInterval(counter);
         }
+        const pct = ((current / totalEligible) * 100).toFixed(2);
         statEl.textContent = current.toLocaleString();
-        percentEl.textContent = ((current / totalEligible) * 100).toFixed(2);
+        percentEl.textContent = pct;
+        overallBar.style.width = Math.min(95, pct) + '%';
+        turnoutPusher.style.left = `calc(${Math.min(92, pct)}% - 12px)`;
       }, 25);
 
       setTimeout(() => {
         document.getElementById('bar-prasarnmit').style.width = '71.4%';
         document.getElementById('bar-ongkharak').style.width = '63.5%';
       }, 150);
+    }
+
+    function boostTurnoutDemo() {
+      votedCount = Math.min(totalEligible, votedCount + 50);
+      const pct = ((votedCount / totalEligible) * 100).toFixed(2);
+      document.getElementById('stat-voted').textContent = votedCount.toLocaleString();
+      document.getElementById('stat-percent').textContent = pct;
+      document.getElementById('overall-turnout-bar').style.width = Math.min(95, pct) + '%';
+      document.getElementById('turnout-pusher').style.left = `calc(${Math.min(92, pct)}% - 12px)`;
+      addLog(`อัปเดตยอดผู้ใช้สิทธิล่าสุด: ${votedCount.toLocaleString()} คน (${pct}%)`, 'INFO');
     }
 
     function submitVote() {
@@ -791,6 +940,8 @@
       document.getElementById('receipt-ref').textContent = 'SWU-2026-' + Math.floor(1000 + Math.random() * 9000);
       document.getElementById('bar-prasarnmit').style.width = '0%';
       document.getElementById('bar-ongkharak').style.width = '0%';
+      document.getElementById('overall-turnout-bar').style.width = '0%';
+      document.getElementById('turnout-pusher').style.left = '0%';
 
       addLog('บันทึกบัตรลงคะแนนลงหีบอิเล็กทรอนิกส์ (ไม่ระบุตัวตนผู้เลือก)', 'PRIVACY');
       addLog('อัปเดตสถานะใน Wi-vote เป็น Voted = True เรียบร้อย', 'SUCCESS');
