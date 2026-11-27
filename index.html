@@ -173,33 +173,27 @@
           </button>
         </header>
 
-        <!-- Clean 1-2-3-4 Progress Stepper (No Character Here) -->
+        <!-- Clean 1-2-3-4 Progress Stepper -->
         <div class="bg-slate-50/95 px-4 py-2.5 border-b border-slate-100">
           <div class="relative flex items-center justify-between">
-            <!-- Background Track -->
             <div class="absolute left-4 right-4 top-3.5 h-1.5 bg-slate-200 rounded-full -z-0"></div>
-            <!-- Animated Fill Track -->
             <div id="progress-track" class="absolute left-4 top-3.5 h-1.5 progress-shimmer rounded-full transition-all duration-700 ease-out -z-0" style="width: 4%;"></div>
 
-            <!-- Step Node 1 -->
             <div class="relative z-10 flex flex-col items-center gap-1">
               <div id="node-1" class="w-7 h-7 rounded-full bg-red-600 text-white text-xs font-bold flex items-center justify-center shadow-sm ring-4 ring-red-100 transition-all duration-300">1</div>
               <span id="label-1" class="text-[10px] font-semibold text-red-700">ต่อ Wi-Fi</span>
             </div>
 
-            <!-- Step Node 2 -->
             <div class="relative z-10 flex flex-col items-center gap-1">
               <div id="node-2" class="w-7 h-7 rounded-full bg-white border-2 border-slate-300 text-slate-400 text-xs font-bold flex items-center justify-center transition-all duration-300">2</div>
               <span id="label-2" class="text-[10px] font-medium text-slate-400">ข้อมูลเลือกตั้ง</span>
             </div>
 
-            <!-- Step Node 3 -->
             <div class="relative z-10 flex flex-col items-center gap-1">
               <div id="node-3" class="w-7 h-7 rounded-full bg-white border-2 border-slate-300 text-slate-400 text-xs font-bold flex items-center justify-center transition-all duration-300">3</div>
               <span id="label-3" class="text-[10px] font-medium text-slate-400">ลงคะแนน</span>
             </div>
 
-            <!-- Step Node 4 -->
             <div class="relative z-10 flex flex-col items-center gap-1">
               <div id="node-4" class="w-7 h-7 rounded-full bg-white border-2 border-slate-300 text-slate-400 text-xs font-bold flex items-center justify-center transition-all duration-300">4</div>
               <span id="label-4" class="text-[10px] font-medium text-slate-400">สรุปผล</span>
@@ -287,7 +281,17 @@
         <!-- ========================================== -->
         <!-- STEP 2: Wi-vote Landing Page               -->
         <!-- ========================================== -->
-        <section id="view-step-2" class="hidden animate-view space-y-3.5">
+        <section id="view-step-2" class="hidden animate-view space-y-3">
+          <!-- Live Ticker Strip -->
+          <div class="bg-slate-900 text-white rounded-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-sm">
+            <p id="step2-ticker" class="text-[11px] font-semibold text-amber-300 truncate">
+              🔴 LIVE | ประสานมิตร 8,304 • องครักษ์ 5,983 • ห่าง 2,321
+            </p>
+            <button onclick="rotateGenZCopy()" class="text-[10px] bg-white/15 active:bg-white/25 text-white px-2 py-0.5 rounded-full shrink-0">
+              สุ่มคำกระตุ้น ↻
+            </button>
+          </div>
+
           <!-- Election Alert Banner -->
           <div class="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-3xl p-4 shadow-md">
             <div class="flex items-center justify-between gap-2">
@@ -309,17 +313,14 @@
             </div>
           </div>
 
-          <!-- Psychological Rivalry & Nudge Card -->
-          <div class="bg-amber-50/90 border border-amber-200/90 rounded-2xl p-3 space-y-2">
+          <!-- Gen Z Psychological Nudge Banner -->
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 space-y-1.5">
             <div class="flex items-center justify-between">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-                <span class="text-xs font-bold text-slate-800">ตอนนี้มาแล้ว <span id="nudge-count" class="text-red-600">14,285</span> คน (<span id="nudge-pct">68.02</span>%)</span>
-              </div>
-              <span class="text-[10px] font-bold bg-red-600 text-white px-2 py-0.5 rounded-full">ประสานมิตรนำอยู่!</span>
+              <span id="step2-nudge-badge" class="text-[10px] font-bold bg-red-600 text-white px-2 py-0.5 rounded-full">FOMO • โหวตแล้ว 14,287 คน</span>
+              <span class="text-[11px] font-extrabold text-red-600"><span id="nudge-pct">68.03</span>%</span>
             </div>
-            <p class="text-[11px] text-slate-700 font-medium">
-              องครักษ์ตามอยู่แค่ไม่กี่ร้อยเสียง ฝั่งไหนจะยอมให้ตามหลัง? รีบกดไปใช้สิทธิเลย!
+            <p id="step2-nudge-text" class="text-xs font-bold text-slate-800 leading-snug">
+              มีคนโหวตไปแล้ว 14,287 คน เหลือแกคนเดียวป่ะ 👀
             </p>
           </div>
 
@@ -486,11 +487,12 @@
 
           <!-- Psychological Campus Rivalry & Turnout Card -->
           <div class="bg-slate-50 border border-slate-200 rounded-3xl p-3.5 space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                🔥 ศึกยอดมาใช้สิทธิ: ประสานมิตร vs องครักษ์
-              </h3>
-              <span class="text-[10px] bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full animate-pulse">LIVE</span>
+            <!-- Live Ticker Header -->
+            <div class="bg-slate-900 text-white rounded-xl px-2.5 py-1.5 flex items-center justify-between gap-2">
+              <p id="step4-ticker" class="text-[11px] font-semibold text-amber-300 truncate">
+                🔴 LIVE | ประสานมิตร 8,305 • องครักษ์ 5,983 • ห่าง 2,322
+              </p>
+              <span class="text-[9px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded shrink-0 animate-pulse">LIVE</span>
             </div>
 
             <!-- Overall Summary + Pushing Character -->
@@ -498,10 +500,10 @@
               <div class="flex items-baseline justify-between">
                 <div>
                   <span class="text-xs text-slate-500">รวมมาใช้สิทธิแล้ว </span>
-                  <span id="stat-voted" class="text-xl font-extrabold text-red-600">14,286</span>
+                  <span id="stat-voted" class="text-xl font-extrabold text-red-600">14,288</span>
                   <span class="text-xs text-slate-500"> คน</span>
                 </div>
-                <span class="text-lg font-extrabold text-slate-800"><span id="stat-percent">68.03</span>%</span>
+                <span class="text-lg font-extrabold text-slate-800"><span id="stat-percent">68.04</span>%</span>
               </div>
 
               <!-- Bar with Pushing Character -->
@@ -532,7 +534,7 @@
                   <span class="font-bold text-red-700 flex items-center gap-1">
                     ประสานมิตร <span id="badge-p" class="text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded">นำอยู่</span>
                   </span>
-                  <span class="font-extrabold text-slate-900"><span id="pct-p">69.20</span>% (<span id="num-p">8,304</span>)</span>
+                  <span class="font-extrabold text-slate-900"><span id="pct-p">69.21</span>% (<span id="num-p">8,305</span>)</span>
                 </div>
                 <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
                   <div id="bar-prasarnmit" class="bg-red-600 h-2.5 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
@@ -553,18 +555,24 @@
               </div>
             </div>
 
-            <!-- Psychological Tension / Gap Message -->
-            <div id="rivalry-tension-msg" class="bg-red-50 border border-red-200 rounded-xl px-3 py-2 text-center text-xs font-bold text-red-800">
-              ประสานมิตรนำอยู่ 2.72% — องครักษ์จะยอมตามหลังแบบนี้เหรอ?!
+            <!-- Dynamic Gen Z Psychological Alert / Rivalry Copy -->
+            <div id="rivalry-box" class="bg-red-50 border border-red-200 rounded-2xl p-3 space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span id="rivalry-tag" class="text-[10px] font-extrabold uppercase tracking-wide bg-red-600 text-white px-2 py-0.5 rounded-full">ยอมเหรอ • ฝั่งตามหลัง</span>
+                <button onclick="rotateGenZCopy()" class="text-[10px] font-semibold text-red-700 underline">เปลี่ยนแคปชัน ↻</button>
+              </div>
+              <p id="rivalry-tension-msg" class="text-xs font-bold text-red-900 leading-snug">
+                ยอมโดนแซงเหรอแก?! ตามอยู่ 2,322 คะแนนเองนะ 😤
+              </p>
             </div>
 
-            <!-- Interactive Boost Buttons for Both Campuses -->
+            <!-- Interactive Boost Buttons: เด็กอโศก vs เด็กนครนายก -->
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="boostCampus('p', 120)" class="bg-red-600 active:bg-red-700 text-white text-[11px] font-bold py-2 px-2.5 rounded-xl transition">
-                + ประสานมิตรลุย (+120)
+              <button onclick="boostCampus('p', 350)" class="bg-red-600 active:bg-red-700 text-white text-xs font-bold py-2.5 px-2.5 rounded-xl shadow-sm transition">
+                + เด็กอโศก (+350)
               </button>
-              <button onclick="boostCampus('o', 150)" class="bg-slate-800 active:bg-slate-900 text-white text-[11px] font-bold py-2 px-2.5 rounded-xl transition">
-                + องครักษ์ฮึดสู้ (+150)
+              <button onclick="boostCampus('o', 550)" class="bg-slate-800 active:bg-slate-900 text-white text-xs font-bold py-2.5 px-2.5 rounded-xl shadow-sm transition">
+                + เด็กนครนายก (+550)
               </button>
             </div>
           </div>
@@ -666,13 +674,104 @@
     const totalO = 9000;
     const totalAll = totalP + totalO;
 
-    let votedP = 8304;
-    let votedO = 5983;
+    // Initial close counts so rivalry flips easily when testing buttons
+    let votedP = 7980; // 66.50%
+    let votedO = 5940; // 66.00%
+    let lastLeader = 'P';
+    let copyIndex = 0;
     let selectedRating = 0;
 
     function getTotalVoted() {
       return votedP + votedO;
     }
+
+    function formatCopy(template, A, B, gap, total, hours) {
+      return template
+        .replace(/\{A\}/g, A)
+        .replace(/\{B\}/g, B)
+        .replace(/\{gap\}/g, gap)
+        .replace(/\{total\}/g, total)
+        .replace(/\{hours\}/g, hours);
+    }
+
+    // Gen Z Psychological Copy Library
+    const copyLibrary = {
+      behind: [
+        "ยอมโดนแซงเหรอแก?! ตามอยู่ {gap} คะแนนเองนะ 😤",
+        "{A} vs {B} อีกฝั่งจะนั่งมองเฉยๆ จริงดิ 👀",
+        "ศักดิ์ศรีไม่มีเหรอ ห่างแค่ {gap} ชวนเพื่อนมาโหวตเดี๋ยวนี้! 🔥",
+        "ถ้าแพ้ตอนนี้ จะตอบเพื่อนว่าไงอ่ะ ว่าไม่ว่างโหวต? 💀",
+        "ตามหลังแค่ {gap} คะแนน แต่ละคนที่ไม่โหวตคือแต้มที่เสียไปนะ",
+        "เขานำแล้ว แล้วแกยังจะนอนหลับทับสิทธิ์? 🛏️",
+        "ยังไม่สายนะ พลิกได้ถ้าแกกดโหวตตอนนี้ ⏰"
+      ],
+      leading: [
+        "นำอยู่ {gap} คะแนน แต่อย่าเพิ่งชิล เดี๋ยวโดนแซงน้า 😏",
+        "ใครว่าชนะแล้ว? อีกฝั่งกำลังไล่มาติดๆ 💀",
+        "นำก็ไม่ได้แปลว่ารอด ไปโหวตกันต่อ!",
+        "{gap} คะแนนไม่ได้เยอะอย่างที่คิด รีบเก็บเพิ่มก่อน",
+        "ที่ 1 วันนี้ ไม่ใช่ที่ 1 ตลอดไป ปิดโหวตอีก {hours} ชม.",
+        "อย่าให้ความมั่นใจพาแพ้ ชวนเพื่อนมาโหวตอีก 🫵"
+      ],
+      closeCall: [
+        "{A} : {B} ห่างกันแค่ {gap} 😱 ใจจะวาย",
+        "แค่ 1 โหวตก็พลิกได้ และอาจเป็นโหวตของแกนี่แหละ",
+        "ตอนนี้ใครก็ชนะได้ ขึ้นอยู่กับแกคนเดียว 🫵",
+        "สูสีขนาดนี้ ไม่โหวตนี่ไม่ไหวนะ",
+        "เส้นตายใกล้เข้ามาทุกวินาที คะแนนห่างแค่ {gap}!",
+        "ใครกดก่อน คนนั้นมีอำนาจ ⚡"
+      ],
+      fomo: [
+        "มีคนโหวตไปแล้ว {total} คน เหลือแกคนเดียวป่ะ 👀",
+        "ทั้งคณะโหวตกันหมดแล้ว แกยังอยู่ไหน?",
+        "{total} เสียงเลือกไปแล้ว เสียงของแกหายไปไหน 🫣",
+        "เพื่อนแกโหวตแล้วนะ เช็คสตอรี่ดูได้เลย",
+        "ไม่ได้โหวตคนเดียวนะแก ทุกคนกำลังกดอยู่ตอนนี้",
+        "ตอนนี้คนโหวตเพิ่มขึ้นทุกนาที อย่าเป็นคนสุดท้ายที่ไม่รู้เรื่อง 😭"
+      ],
+      lossAversion: [
+        "ไม่โหวตตอนนี้ ผลออกแล้วอย่ามาบ่นนะ 💅",
+        "ถ้าทีมแกแพ้แค่ {gap} คะแนน แกจะเสียใจมั้ย?",
+        "ปิดโหวตอีก {hours} ชม. พลาดแล้วย้อนไม่ได้ ⏰",
+        "สิทธิ์นี้ไม่ได้มีให้ทุกวัน อย่าปล่อยหลุดมือ",
+        "นายกคนนี้จะอยู่กับเราทั้งปี แกจะปล่อยให้คนอื่นเลือกแทนเหรอ?",
+        "เสียงเดียวของแกอาจเป็นเสียงที่ตัดสินทุกอย่าง"
+      ],
+      dare: [
+        "กล้าไม่โหวตมั้ยล่ะ? 😎",
+        "บอกว่ารักคณะ แต่ไม่โหวตเนี่ยนะ? 🤨",
+        "แค่ 30 วิ ยังไม่มีเวลาให้คณะตัวเองเหรอ",
+        "ใครโหวตแล้วยกมือขึ้น 🙋 แล้วแกอ่ะ?",
+        "เก่งแต่บ่น แต่ไม่ยอมโหวตใช่ป่ะ",
+        "ใครว่า Gen Z ไม่ใส่ใจ พิสูจน์ให้ดูหน่อย 💪"
+      ],
+      funny: [
+        "ประสานมิตร {A} 😎 องครักษ์ {B} 😤 คนที่ยังไม่โหวต 0 😴",
+        "คะแนนวิ่งเร็วกว่า Wi-Fi หอ แกยังไม่กดอีก 🏃",
+        "ผลตอนนี้ {A}-{B} ส่วนแกอยู่ฝั่ง \"ยังไม่ได้ทำ\" 🫠",
+        "นอนต่ออีกนิด... ไม่ได้! ตื่นมาโหวตก่อน ☕",
+        "ดูคะแนนเพลิน แต่ลืมกดโหวตใช่ป่ะ 🤭",
+        "ไปเลือกชานมได้ใน 1 นาที เลือกนายกฯ ก็ใช้เวลาเท่ากัน 🧋"
+      ],
+      ticker: [
+        "🔴 LIVE | ประสานมิตร {A} • องครักษ์ {B} • ห่าง {gap}",
+        "📊 {A} vs {B} ใครจะแซง? โหวตเลย",
+        "⚡ คะแนนเปลี่ยนทุกนาที กดก่อนโดนแซง",
+        "🔥 สนามร้อนแล้ว! ห่างกัน {gap} คะแนน",
+        "⏳ เหลือ {hours} ชม. | {total} โหวตแล้ว",
+        "🚨 ใครนำ? ใครตาม? ขึ้นอยู่กับแก"
+      ],
+      leadChangeO: [
+        "🚨 องครักษ์แซงแล้ว! ประสานมิตรจะตอบโต้ยังไง?",
+        "😱 สลับกันนำอีกรอบ ใครจะอยู่ได้นานกว่า?",
+        "⚡ แซงปุ๊บ โดนแซงกลับปั๊บ สูสีสุดๆ"
+      ],
+      leadChangeP: [
+        "🔄 ประสานมิตรแซงกลับ! สนามพลิกอีกแล้ว",
+        "😱 สลับกันนำอีกรอบ ใครจะอยู่ได้นานกว่า?",
+        "⚡ แซงปุ๊บ โดนแซงกลับปั๊บ สูสีสุดๆ"
+      ]
+    };
 
     function addLog(msg, type = 'INFO') {
       const logBox = document.getElementById('system-log');
@@ -701,7 +800,6 @@
       panel.classList.toggle('flex');
     }
 
-    // Update 1-2-3-4 Progress Bar Only (No Character)
     function updateStepper(activeStep) {
       const track = document.getElementById('progress-track');
       const trackWidths = { 1: '4%', 2: '31%', 3: '63%', 4: '90%' };
@@ -768,6 +866,84 @@
       }, 60);
     }
 
+    function rotateGenZCopy(forcedAlert = null) {
+      copyIndex++;
+      const totalV = getTotalVoted();
+      const pctP = ((votedP / totalP) * 100).toFixed(2);
+      const pctO = ((votedO / totalO) * 100).toFixed(2);
+      const gapPct = Math.abs(parseFloat(pctP) - parseFloat(pctO)).toFixed(2) + '%';
+      const A = pctP + '%';
+      const B = pctO + '%';
+      const totalStr = totalV.toLocaleString();
+      const hours = '3';
+
+      // Update Live Tickers
+      const tickerTpl = copyLibrary.ticker[copyIndex % copyLibrary.ticker.length];
+      const tickerText = formatCopy(tickerTpl, A, B, gapPct, totalStr, hours);
+      document.getElementById('step2-ticker').textContent = tickerText;
+      document.getElementById('step4-ticker').textContent = tickerText;
+
+      // Step 2 Nudge Pool (FOMO, Loss Aversion, Dare, Funny)
+      const step2Categories = [
+        { tag: `FOMO • โหวตแล้ว ${totalStr} คน`, list: copyLibrary.fomo },
+        { tag: 'LOSS AVERSION • อย่าปล่อยผ่าน', list: copyLibrary.lossAversion },
+        { tag: 'ท้าทาย • 30 วิเท่านั้น', list: copyLibrary.dare },
+        { tag: 'กวนๆ • ปลุกไปโหวต', list: copyLibrary.funny }
+      ];
+      const s2Pick = step2Categories[copyIndex % step2Categories.length];
+      const s2Tpl = s2Pick.list[copyIndex % s2Pick.list.length];
+      document.getElementById('step2-nudge-badge').textContent = s2Pick.tag;
+      document.getElementById('step2-nudge-text').textContent = formatCopy(s2Tpl, A, B, gapPct, totalStr, hours);
+
+      // Step 4 Rivalry / Alert Pool
+      const tagEl = document.getElementById('rivalry-tag');
+      const msgEl = document.getElementById('rivalry-tension-msg');
+      const boxEl = document.getElementById('rivalry-box');
+
+      if (forcedAlert === 'O_LEAD') {
+        const alertTpl = copyLibrary.leadChangeO[copyIndex % copyLibrary.leadChangeO.length];
+        tagEl.textContent = 'ALERT • คะแนนเปลี่ยนมือ!';
+        tagEl.className = 'text-[10px] font-extrabold bg-amber-500 text-slate-900 px-2 py-0.5 rounded-full animate-bounce';
+        boxEl.className = 'bg-amber-50 border-2 border-amber-400 rounded-2xl p-3 space-y-1.5';
+        msgEl.className = 'text-xs font-extrabold text-slate-900 leading-snug';
+        msgEl.textContent = formatCopy(alertTpl, A, B, gapPct, totalStr, hours);
+        return;
+      }
+
+      if (forcedAlert === 'P_LEAD') {
+        const alertTpl = copyLibrary.leadChangeP[copyIndex % copyLibrary.leadChangeP.length];
+        tagEl.textContent = 'ALERT • แซงกลับแล้ว!';
+        tagEl.className = 'text-[10px] font-extrabold bg-red-600 text-white px-2 py-0.5 rounded-full animate-bounce';
+        boxEl.className = 'bg-red-50 border-2 border-red-400 rounded-2xl p-3 space-y-1.5';
+        msgEl.className = 'text-xs font-extrabold text-red-900 leading-snug';
+        msgEl.textContent = formatCopy(alertTpl, A, B, gapPct, totalStr, hours);
+        return;
+      }
+
+      const diffNum = Math.abs(parseFloat(pctP) - parseFloat(pctO));
+      const step4Categories = diffNum < 1.0
+        ? [
+            { tag: 'สูสีจนใจสั่น 🔥', list: copyLibrary.closeCall },
+            { tag: 'ยอมเหรอ (ฝั่งตามหลัง)', list: copyLibrary.behind },
+            { tag: 'อย่าประมาท (ฝั่งนำ)', list: copyLibrary.leading }
+          ]
+        : [
+            { tag: 'ยอมเหรอ (ฝั่งตามหลัง)', list: copyLibrary.behind },
+            { tag: 'อย่าประมาท (ฝั่งนำ)', list: copyLibrary.leading },
+            { tag: 'กวนๆ • ศึกสองวิทยาเขต', list: copyLibrary.funny },
+            { tag: 'LOSS AVERSION • ห่างแค่นี้', list: copyLibrary.lossAversion }
+          ];
+
+      const s4Pick = step4Categories[copyIndex % step4Categories.length];
+      const s4Tpl = s4Pick.list[copyIndex % s4Pick.list.length];
+
+      tagEl.textContent = s4Pick.tag;
+      tagEl.className = 'text-[10px] font-extrabold bg-red-600 text-white px-2 py-0.5 rounded-full';
+      boxEl.className = 'bg-red-50 border border-red-200 rounded-2xl p-3 space-y-1.5';
+      msgEl.className = 'text-xs font-bold text-red-900 leading-snug';
+      msgEl.textContent = formatCopy(s4Tpl, A, B, gapPct, totalStr, hours);
+    }
+
     function updateRivalryUI(animateBars = true) {
       const totalV = getTotalVoted();
       const pctAll = ((totalV / totalAll) * 100).toFixed(2);
@@ -776,8 +952,6 @@
 
       document.getElementById('stat-voted').textContent = totalV.toLocaleString();
       document.getElementById('stat-percent').textContent = pctAll;
-
-      document.getElementById('nudge-count').textContent = totalV.toLocaleString();
       document.getElementById('nudge-pct').textContent = pctAll;
 
       document.getElementById('pct-p').textContent = pctP;
@@ -788,21 +962,27 @@
       const diffPct = Math.abs(parseFloat(pctP) - parseFloat(pctO)).toFixed(2);
       const badgeP = document.getElementById('badge-p');
       const badgeO = document.getElementById('badge-o');
-      const msgBox = document.getElementById('rivalry-tension-msg');
 
-      if (parseFloat(pctP) >= parseFloat(pctO)) {
+      const currentLeader = parseFloat(pctP) >= parseFloat(pctO) ? 'P' : 'O';
+      let leadChangedAlert = null;
+      if (currentLeader !== lastLeader) {
+        leadChangedAlert = currentLeader === 'O' ? 'O_LEAD' : 'P_LEAD';
+        lastLeader = currentLeader;
+      }
+
+      if (currentLeader === 'P') {
         badgeP.textContent = 'นำอยู่';
         badgeP.className = 'text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded';
         badgeO.textContent = `ตามหลัง ${diffPct}%`;
         badgeO.className = 'text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
-        msgBox.textContent = `ประสานมิตรนำอยู่ ${diffPct}% — องครักษ์จะยอมให้ตามหลังแบบนี้จริงดิ?!`;
       } else {
-        badgeO.textContent = 'แซงแล้ว!';
+        badgeO.textContent = 'แซงนำแล้ว!';
         badgeO.className = 'text-[10px] bg-slate-800 text-white px-1.5 py-0.5 rounded';
         badgeP.textContent = `ตามหลัง ${diffPct}%`;
         badgeP.className = 'text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded';
-        msgBox.textContent = `องครักษ์แซงขึ้นมาแล้ว ${diffPct}% — ประสานมิตรจะยอมโดนแซงเหรอ?!`;
       }
+
+      rotateGenZCopy(leadChangedAlert);
 
       if (animateBars) {
         document.getElementById('overall-turnout-bar').style.width = Math.min(95, pctAll) + '%';
@@ -896,10 +1076,10 @@
     function boostCampus(campus, amount) {
       if (campus === 'p') {
         votedP = Math.min(totalP, votedP + amount);
-        addLog(`ประสานมิตรเพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
+        addLog(`เด็กอโศก (ประสานมิตร) กดเพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
       } else {
         votedO = Math.min(totalO, votedO + amount);
-        addLog(`องครักษ์เพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
+        addLog(`เด็กนครนายก (องครักษ์) กดเพิ่มยอดผู้ใช้สิทธิ +${amount} คน`, 'INFO');
       }
       updateRivalryUI(true);
     }
@@ -952,8 +1132,9 @@
       hasSeenNotice = false;
       hasVoted = false;
       selectedCandidate = null;
-      votedP = 8304;
-      votedO = 5983;
+      votedP = 7980;
+      votedO = 5940;
+      lastLeader = 'P';
       document.getElementById('input-buasri').value = '';
       document.getElementById('input-pass').value = '';
       document.getElementById('check-user').classList.add('hidden');
