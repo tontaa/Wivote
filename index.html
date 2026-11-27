@@ -318,13 +318,13 @@
         <!-- STEP 2: Wi-vote Landing Page               -->
         <!-- ========================================== -->
         <section id="view-step-2" class="hidden animate-view space-y-3">
-          <!-- Fact Data Ticker Strip -->
+          <!-- Friendly Fact Data Ticker Strip -->
           <div class="bg-slate-900 text-white rounded-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-sm">
-            <p id="step2-ticker" class="text-[11px] font-semibold text-amber-300 truncate">
-              ใช้สิทธิ ป.ตรี แล้ว 19,544 / 29,339 คน (66.61%) • วันเลือกตั้ง 30 ธ.ค. 69
+            <p id="step2-ticker" class="text-[11px] font-medium text-amber-300 truncate">
+              เพื่อนๆ ป.ตรี โหวตไปแล้ว 19,544 คน (66.61%) • ปิดหีบ 30 ธ.ค. นี้
             </p>
             <button onclick="rotateFactData()" class="text-[10px] bg-white/15 active:bg-white/25 text-white px-2 py-0.5 rounded-full shrink-0">
-              อัปเดตสถิติ ↻
+              ดูสถิติอื่น ↻
             </button>
           </div>
 
@@ -344,19 +344,19 @@
               </div>
               <div class="text-xs space-y-0.5">
                 <p class="font-semibold text-white text-sm">เวลา 08.00 – 17.00 น.</p>
-                <p class="text-red-100 text-[11px]">ผู้มีสิทธิ: นิสิตระดับปริญญาตรี (29,339 คน)</p>
+                <p class="text-red-100 text-[11px]">สำหรับนิสิตระดับปริญญาตรีทั้ง 29,339 คน</p>
               </div>
             </div>
           </div>
 
-          <!-- Fact Data Summary Card -->
+          <!-- Friendly Fact Data Summary Card -->
           <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-1.5">
             <div class="flex items-center justify-between">
-              <span id="step2-fact-badge" class="text-[10px] font-bold bg-slate-800 text-white px-2 py-0.5 rounded-full">ฐานผู้มีสิทธิ ป.ตรี</span>
+              <span id="step2-fact-badge" class="text-[10px] font-bold bg-slate-800 text-white px-2 py-0.5 rounded-full">ความคืบหน้าล่าสุด</span>
               <span class="text-[11px] font-extrabold text-red-600"><span id="nudge-pct">66.61</span>%</span>
             </div>
-            <p id="step2-fact-text" class="text-xs font-semibold text-slate-800 leading-snug">
-              คำนวณจากนิสิตทั้งหมด 32,832 คน หัก ป.โท (2,262), ป.เอก (1,100) และ ป.บัตรฯ (96) คงเหลือผู้มีสิทธิ ป.ตรี 29,339 คน
+            <p id="step2-fact-text" class="text-xs font-medium text-slate-700 leading-relaxed">
+              ตอนนี้มีนิสิต ป.ตรี ออกมาใช้สิทธิแล้ว <strong class="text-slate-900">19,544 คน</strong> จากทั้งหมด <strong class="text-slate-900">29,339 คน</strong> ยังรอเสียงจากเพื่อนๆ อีก <strong class="text-red-600">9,795 คน</strong> นะ
             </p>
           </div>
 
@@ -510,9 +510,9 @@
           <!-- Receipt Card -->
           <div class="bg-emerald-50 border border-emerald-200 rounded-3xl p-3 text-center space-y-1">
             <div class="w-9 h-9 bg-emerald-600 text-white rounded-full flex items-center justify-center text-base mx-auto shadow-sm step-active-pop">✓</div>
-            <h2 class="text-sm font-bold text-emerald-900">บันทึกการใช้สิทธิเรียบร้อยแล้ว (30 ธ.ค. 2569)</h2>
+            <h2 class="text-sm font-bold text-emerald-900">ขอบคุณที่ร่วมใช้สิทธิเลือกตั้ง 30 ธ.ค. 2569</h2>
             <p class="text-[11px] text-emerald-700">
-              ฐานผู้มีสิทธิระดับปริญญาตรี 29,339 คน (แยกตามอัตลักษณ์ 16 คณะ/วิทยาลัย)
+              1 เสียงของคุณถูกนับรวมในสถิติของคณะเรียบร้อยแล้ว
             </p>
           </div>
 
@@ -520,9 +520,9 @@
           <div class="bg-slate-50 border border-slate-200 rounded-3xl p-3.5 space-y-3">
             <div class="flex items-baseline justify-between">
               <div>
-                <p class="text-[11px] text-slate-500">เปอร์เซ็นต์มาใช้สิทธิรวม (ป.ตรี)</p>
+                <p class="text-[11px] text-slate-500">ภาพรวมการใช้สิทธิ (นิสิต ป.ตรี)</p>
                 <p class="text-xs font-semibold text-slate-700">
-                  <span id="stat-voted" class="text-red-600 font-extrabold">19,545</span> / <span class="font-bold">29,339</span> คน
+                  โหวตแล้ว <span id="stat-voted" class="text-red-600 font-extrabold">19,545</span> จาก <span class="font-bold">29,339</span> คน
                 </p>
               </div>
               <div class="text-2xl font-extrabold text-red-600">
@@ -549,12 +549,12 @@
               </div>
             </div>
 
-            <!-- Fact Insight Line -->
-            <div id="fact-insight-box" class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center justify-between gap-2">
-              <p id="fact-tension-msg" class="text-[11px] font-semibold text-slate-800 leading-snug">
-                ประสานมิตรนำอยู่ที่ 67.20% และองครักษ์อยู่ที่ 64.58% (ต่างกัน 2.62%)
+            <!-- Friendly Fact Insight Line -->
+            <div id="fact-insight-box" class="bg-white border border-slate-200 rounded-xl px-3 py-2.5 flex items-center justify-between gap-2">
+              <p id="fact-tension-msg" class="text-[11px] font-medium text-slate-700 leading-relaxed">
+                ตอนนี้ประสานมิตรนำอยู่ที่ 67.20% ส่วนองครักษ์ตามมาติดๆ ที่ 64.58%
               </p>
-              <button onclick="rotateFactData()" class="text-[10px] font-bold text-red-700 shrink-0 underline">เปลี่ยนข้อมูล ↻</button>
+              <button onclick="rotateFactData()" class="text-[10px] font-bold text-red-700 shrink-0 underline">ดูข้อมูลอื่น ↻</button>
             </div>
 
             <!-- Boost Buttons: เด็กอโศก vs เด็กนครนายก -->
@@ -590,8 +590,8 @@
             </div>
           </div>
 
-          <!-- Unique Faculty Progress Bars (16 Faculties/Colleges) -->
-          <div class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-4 max-h-[340px] overflow-y-auto custom-scroll">
+          <!-- Unique Faculty Progress Bars (18 Faculties/Colleges) -->
+          <div class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-4 max-h-[350px] overflow-y-auto custom-scroll">
             <div>
               <h3 class="text-xs font-extrabold text-red-700 mb-2.5 flex items-center justify-between">
                 <span>แถบวิ่งรายงานรายคณะ • ประสานมิตร</span>
@@ -603,7 +603,7 @@
             <div class="pt-3 border-t border-slate-100">
               <h3 class="text-xs font-extrabold text-slate-800 mb-2.5 flex items-center justify-between">
                 <span>แถบวิ่งรายงานรายคณะ • องครักษ์</span>
-                <span class="text-[10px] font-medium text-slate-400">7 คณะ</span>
+                <span class="text-[10px] font-medium text-slate-400">9 คณะ</span>
               </h3>
               <div id="faculty-list-ongkharak" class="space-y-3"></div>
             </div>
@@ -670,7 +670,7 @@
           </div>
           <div id="system-log" class="bg-slate-900 text-emerald-400 font-mono text-[11px] p-3.5 rounded-2xl h-48 overflow-y-auto custom-scroll space-y-1.5 leading-relaxed">
             <div>[INIT] Wi-vote Captive Portal พร้อมทำงาน (วันเลือกตั้ง 30 ธ.ค. 69)...</div>
-            <div>[INFO] โหลดธีม Progress Bar เฉพาะตัวทั้ง 16 คณะ/วิทยาลัยเรียบร้อย</div>
+            <div>[INFO] โหลดข้อมูลทั้ง 18 คณะ/วิทยาลัย (ประสานมิตร 9 • องครักษ์ 9) เรียบร้อย</div>
           </div>
         </div>
       </div>
@@ -684,7 +684,7 @@
     let selectedCandidate = null;
     let factIndex = 0;
 
-    // 16 Faculties/Colleges with Unique Visual Identity (Color, Pattern, Runner Badge, Motto)
+    // 18 Faculties/Colleges (9 Prasarnmit + 9 Ongkharak including Medicine & Dentistry -> total eligible = 29,339)
     const faculties = [
       // Prasarnmit (9 faculties/colleges -> total 22,649)
       {
@@ -699,8 +699,7 @@
         pattern: 'bar-striped',
         border: '#bfdbfe',
         badgeBg: '#eff6ff',
-        badgeText: '#1d4ed8',
-        tag: 'กราฟพุ่งสายบริหาร'
+        badgeText: '#1d4ed8'
       },
       {
         id: 'econ',
@@ -709,13 +708,12 @@
         campus: 'p',
         eligible: 1680,
         voted: 1142,
-        icon: '🪙',
+        icon: '💵',
         gradient: 'linear-gradient(90deg, #b45309, #fbbf24)',
         pattern: 'bar-dotted',
         border: '#fde68a',
         badgeBg: '#fffbeb',
-        badgeText: '#b45309',
-        tag: 'ดัชนีเศรษฐศาสตร์'
+        badgeText: '#b45309'
       },
       {
         id: 'fofa',
@@ -729,8 +727,7 @@
         pattern: 'bar-wave',
         border: '#fbcfe8',
         badgeBg: '#fdf2f8',
-        badgeText: '#be185d',
-        tag: 'ฝีแปรงศิลปกรรม'
+        badgeText: '#be185d'
       },
       {
         id: 'env',
@@ -744,8 +741,7 @@
         pattern: 'bar-wave',
         border: '#bbf7d0',
         badgeBg: '#f0fdf4',
-        badgeText: '#15803d',
-        tag: 'เส้นทางสีเขียว'
+        badgeText: '#15803d'
       },
       {
         id: 'cosci',
@@ -759,8 +755,7 @@
         pattern: 'bar-striped',
         border: '#e9d5ff',
         badgeBg: '#faf5ff',
-        badgeText: '#7c3aed',
-        tag: 'ไทม์ไลน์นวัตกรรมสื่อ'
+        badgeText: '#7c3aed'
       },
       {
         id: 'swis',
@@ -774,8 +769,7 @@
         pattern: 'bar-dotted',
         border: '#99f6e4',
         badgeBg: '#f0fdfa',
-        badgeText: '#0f766e',
-        tag: 'Global Sustainability'
+        badgeText: '#0f766e'
       },
       {
         id: 'cci',
@@ -789,8 +783,7 @@
         pattern: 'bar-striped',
         border: '#fed7aa',
         badgeBg: '#fff7ed',
-        badgeText: '#c2410c',
-        tag: 'รันเวย์สร้างสรรค์'
+        badgeText: '#c2410c'
       },
       {
         id: 'hum',
@@ -804,8 +797,7 @@
         pattern: 'bar-dotted',
         border: '#e9d5ff',
         badgeBg: '#faf5ff',
-        badgeText: '#7e22ce',
-        tag: 'หน้าหนังสือมนุษย์ฯ'
+        badgeText: '#7e22ce'
       },
       {
         id: 'soc',
@@ -819,115 +811,135 @@
         pattern: 'bar-striped',
         border: '#fecaca',
         badgeBg: '#fef2f2',
-        badgeText: '#b91c1c',
-        tag: 'พลังพลเมืองสังคมฯ'
+        badgeText: '#b91c1c'
       },
 
-      // Ongkharak (7 faculties -> total 6,690)
+      // Ongkharak (9 faculties including Medicine & Dentistry -> total 6,690)
+      {
+        id: 'med',
+        name: 'คณะแพทยศาสตร์',
+        short: 'MED',
+        campus: 'o',
+        eligible: 840,
+        voted: 571,
+        icon: '⚕️',
+        gradient: 'linear-gradient(90deg, #047857, #34d399)',
+        pattern: 'bar-striped',
+        border: '#a7f3d0',
+        badgeBg: '#ecfdf5',
+        badgeText: '#065f46'
+      },
+      {
+        id: 'dent',
+        name: 'คณะทันตแพทยศาสตร์',
+        short: 'DENT',
+        campus: 'o',
+        eligible: 420,
+        voted: 281,
+        icon: '🦷',
+        gradient: 'linear-gradient(90deg, #5b21b6, #a78bfa)',
+        pattern: 'bar-dotted',
+        border: '#ddd6fe',
+        badgeBg: '#f5f3ff',
+        badgeText: '#5b21b6'
+      },
       {
         id: 'eng',
         name: 'คณะวิศวกรรมศาสตร์',
         short: 'ENG',
         campus: 'o',
-        eligible: 1850,
-        voted: 1202,
+        eligible: 1480,
+        voted: 962,
         icon: '⚙️',
         gradient: 'linear-gradient(90deg, #991b1b, #ef4444)',
         pattern: 'bar-striped',
         border: '#fecaca',
         badgeBg: '#fef2f2',
-        badgeText: '#991b1b',
-        tag: 'ฟันเฟืองวิศวะ'
+        badgeText: '#991b1b'
       },
       {
         id: 'pe',
         name: 'คณะพลศึกษา',
         short: 'PE',
         campus: 'o',
-        eligible: 1120,
-        voted: 739,
+        eligible: 920,
+        voted: 607,
         icon: '🏃',
         gradient: 'linear-gradient(90deg, #c2410c, #fb923c)',
         pattern: 'bar-striped',
         border: '#fed7aa',
         badgeBg: '#fff7ed',
-        badgeText: '#c2410c',
-        tag: 'ลู่วิ่งสปีดพลศึกษา'
+        badgeText: '#c2410c'
       },
       {
         id: 'agri',
         name: 'คณะเทคโนโลยีและนวัตกรรมผลิตภัณฑ์การเกษตร',
         short: 'AGRI',
         campus: 'o',
-        eligible: 740,
-        voted: 473,
+        eligible: 610,
+        voted: 390,
         icon: '🌾',
         gradient: 'linear-gradient(90deg, #4d7c0f, #a3e635)',
         pattern: 'bar-wave',
         border: '#d9f99d',
         badgeBg: '#f7fee7',
-        badgeText: '#3f6212',
-        tag: 'รวงข้าวนวัตกรรม'
+        badgeText: '#3f6212'
       },
       {
         id: 'pt',
         name: 'คณะกายภาพบำบัด',
         short: 'PT',
         campus: 'o',
-        eligible: 620,
-        voted: 403,
+        eligible: 520,
+        voted: 338,
         icon: '🩺',
         gradient: 'linear-gradient(90deg, #0284c7, #38bdf8)',
         pattern: 'bar-wave',
         border: '#bae6fd',
         badgeBg: '#f0f9ff',
-        badgeText: '#0369a1',
-        tag: 'คลื่นฟื้นฟูกายภาพ'
+        badgeText: '#0369a1'
       },
       {
         id: 'pharm',
         name: 'คณะเภสัชศาสตร์',
         short: 'PHARM',
         campus: 'o',
-        eligible: 580,
-        voted: 382,
+        eligible: 480,
+        voted: 316,
         icon: '💊',
         gradient: 'linear-gradient(90deg, #65a30d, #bef264)',
         pattern: 'bar-dotted',
         border: '#d9f99d',
         badgeBg: '#f7fee7',
-        badgeText: '#4d7c0f',
-        tag: 'แคปซูลเขียวมะกอก'
+        badgeText: '#4d7c0f'
       },
       {
         id: 'nur',
         name: 'คณะพยาบาลศาสตร์',
         short: 'NURSE',
         campus: 'o',
-        eligible: 960,
-        voted: 614,
+        eligible: 760,
+        voted: 486,
         icon: '🏥',
         gradient: 'linear-gradient(90deg, #e11d48, #fda4af)',
         pattern: 'bar-dotted',
         border: '#fecdd3',
         badgeBg: '#fff1f2',
-        badgeText: '#be123c',
-        tag: 'ชีพจรพยาบาล'
+        badgeText: '#be123c'
       },
       {
         id: 'ahs',
         name: 'คณะสหเวชศาสตร์',
         short: 'AHS',
         campus: 'o',
-        eligible: 820,
-        voted: 517,
+        eligible: 660,
+        voted: 416,
         icon: '🔬',
         gradient: 'linear-gradient(90deg, #4338ca, #818cf8)',
         pattern: 'bar-striped',
         border: '#c7d2fe',
         badgeBg: '#eef2ff',
-        badgeText: '#3730a3',
-        tag: 'แล็บสหเวชฯ'
+        badgeText: '#3730a3'
       }
     ];
 
@@ -1057,7 +1069,7 @@
                   </span>
                   <p class="text-[11px] font-bold text-slate-800 truncate">${f.name}</p>
                 </div>
-                <p class="text-[9.5px] text-slate-400 mt-0.5">${f.tag} • ใช้สิทธิ ${f.voted.toLocaleString()} / ${f.eligible.toLocaleString()} คน</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">ใช้สิทธิ ${f.voted.toLocaleString()} / ${f.eligible.toLocaleString()} คน</p>
               </div>
               <span class="text-xs font-extrabold shrink-0" style="color:${f.badgeText};">${pct}%</span>
             </div>
@@ -1070,7 +1082,7 @@
                 </div>
               </div>
 
-              <!-- Running Faculty Mascot/Icon -->
+              <!-- Running Faculty Icon -->
               <div class="absolute -top-0.5 transition-all duration-700 ease-out pointer-events-none runner-badge"
                    style="left: calc(${runnerLeft}% - 10px);">
                 <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-sm text-xs border"
@@ -1109,37 +1121,40 @@
       const topFac = [...faculties].sort((a, b) => (b.voted / b.eligible) - (a.voted / a.eligible))[0];
       const topPct = ((topFac.voted / topFac.eligible) * 100).toFixed(2);
 
+      // Friendly Ticker Lines
       const tickerLines = [
-        `ใช้สิทธิ ป.ตรี แล้ว ${totalV.toLocaleString()} / ${totalEligibleAll.toLocaleString()} คน (${pctAll}%) • เลือกตั้ง 30 ธ.ค. 69`,
-        `ประสานมิตร ป.ตรี ${pctP}% (${pTot.voted.toLocaleString()}/${pTot.eligible.toLocaleString()}) • องครักษ์ ป.ตรี ${pctO}% (${oTot.voted.toLocaleString()}/${oTot.eligible.toLocaleString()})`,
-        `คณะที่เปอร์เซ็นต์สูงสุดตอนนี้: ${topFac.name} (${topPct}%) • คงเหลือผู้มีสิทธิอีก ${remainingV.toLocaleString()} คน`
+        `เพื่อนๆ ป.ตรี โหวตไปแล้ว ${totalV.toLocaleString()} คน (${pctAll}%) • ปิดหีบ 30 ธ.ค. นี้`,
+        `ประสานมิตรโหวตแล้ว ${pctP}% (${pTot.voted.toLocaleString()} คน) • องครักษ์โหวตแล้ว ${pctO}% (${oTot.voted.toLocaleString()} คน)`,
+        `ตอนนี้ ${topFac.name} นำโด่งที่ ${topPct}% • ยังรอเพื่อนๆ อีก ${remainingV.toLocaleString()} คน`
       ];
       document.getElementById('step2-ticker').textContent = tickerLines[factIndex % tickerLines.length];
 
+      // Friendly Step 2 Lines (All numbers preserved, conversational tone)
       const s2Lines = [
         {
-          badge: 'ฐานผู้มีสิทธิ ป.ตรี',
-          text: `คำนวณจากนิสิตทั้งหมด 32,832 คน หัก ป.โท (2,262), ป.เอก (1,100) และ ป.บัตรฯ (96) คงเหลือผู้มีสิทธิ ป.ตรี 29,339 คน`
+          badge: 'ความคืบหน้าล่าสุด',
+          html: `ตอนนี้มีนิสิต ป.ตรี ออกมาใช้สิทธิแล้ว <strong class="text-slate-900">${totalV.toLocaleString()} คน</strong> จากทั้งหมด <strong class="text-slate-900">${totalEligibleAll.toLocaleString()} คน</strong> ยังรอเสียงจากเพื่อนๆ อีก <strong class="text-red-600">${remainingV.toLocaleString()} คน</strong> นะ`
         },
         {
-          badge: 'ยอดใช้สิทธิปัจจุบัน',
-          text: `มาใช้สิทธิแล้ว ${totalV.toLocaleString()} คน จาก 29,339 คน (${pctAll}%) ยังไม่มาใช้สิทธิอีก ${remainingV.toLocaleString()} คน`
+          badge: 'ใครมีสิทธิเลือกตั้งบ้าง?',
+          html: `จากนิสิต มศว ทั้งหมด 32,832 คน เมื่อหักบัณฑิตศึกษา (ป.โท 2,262, ป.เอก 1,100 และ ป.บัตรฯ 96) จะมีเพื่อนๆ ป.ตรี ที่ร่วมโหวตได้ทั้งหมด <strong class="text-slate-900">${totalEligibleAll.toLocaleString()} คน</strong>`
         },
         {
-          badge: 'วันลงคะแนน',
-          text: `กำหนดวันเลือกตั้ง 30 ธันวาคม 2569 แยกฐานผู้มีสิทธิระดับปริญญาตรีเฉพาะ 16 คณะ/วิทยาลัย`
+          badge: 'คณะที่มาแรงตอนนี้',
+          html: `<strong class="text-slate-900">${topFac.name}</strong> มีผู้มาใช้สิทธิสูงสุดที่ <strong class="text-red-600">${topPct}%</strong> (${topFac.voted.toLocaleString()} จาก ${topFac.eligible.toLocaleString()} คน)`
         }
       ];
       const pickS2 = s2Lines[factIndex % s2Lines.length];
       document.getElementById('step2-fact-badge').textContent = pickS2.badge;
-      document.getElementById('step2-fact-text').textContent = pickS2.text;
+      document.getElementById('step2-fact-text').innerHTML = pickS2.html;
 
+      // Friendly Step 4 Lines (All numbers preserved, conversational tone)
       const s4Lines = [
-        `ประสานมิตรอยู่ที่ ${pctP}% และองครักษ์อยู่ที่ ${pctO}% (ส่วนต่าง ${gapPct}%)`,
-        `อันดับ 1 รายคณะตอนนี้คือ ${topFac.name} ที่ ${topPct}% (${topFac.voted.toLocaleString()}/${topFac.eligible.toLocaleString()} คน)`,
-        `มาใช้สิทธิแล้ว ${totalV.toLocaleString()} คน จากผู้มีสิทธิ ป.ตรี 29,339 คน (เหลืออีก ${remainingV.toLocaleString()} คน)`
+        `ตอนนี้มีเพื่อนๆ ป.ตรี มาใช้สิทธิแล้ว <strong class="text-slate-900">${totalV.toLocaleString()} คน</strong> จากทั้งหมด <strong class="text-slate-900">${totalEligibleAll.toLocaleString()} คน</strong> (ยังเหลือเพื่อนอีก <strong class="text-red-600">${remainingV.toLocaleString()} คน</strong> ที่ยังไม่ได้กดโหวต)`,
+        `ฝั่งประสานมิตรโหวตไปแล้ว <strong class="text-red-700">${pctP}%</strong> ส่วนฝั่งองครักษ์ตามมาที่ <strong class="text-slate-900">${pctO}%</strong> (ห่างกันเพียง <strong class="text-red-600">${gapPct}%</strong>)`,
+        `อันดับ 1 ตอนนี้ยกให้ <strong class="text-slate-900">${topFac.name}</strong> ที่ขยับไปถึง <strong class="text-red-600">${topPct}%</strong> (${topFac.voted.toLocaleString()}/${topFac.eligible.toLocaleString()} คน)`
       ];
-      document.getElementById('fact-tension-msg').textContent = s4Lines[factIndex % s4Lines.length];
+      document.getElementById('fact-tension-msg').innerHTML = s4Lines[factIndex % s4Lines.length];
     }
 
     function updateTurnoutUI(animateBars = true) {
@@ -1302,7 +1317,7 @@
       const initialVoted = {
         bsm: 2210, econ: 1142, fofa: 1621, env: 983, cosci: 1754,
         swis: 871, cci: 1247, hum: 2762, soc: 2624,
-        eng: 1202, pe: 739, agri: 473, pt: 403, pharm: 382, nur: 614, ahs: 517
+        med: 571, dent: 281, eng: 962, pe: 607, agri: 390, pt: 338, pharm: 316, nur: 486, ahs: 416
       };
       faculties.forEach(f => {
         f.voted = initialVoted[f.id] ?? f.voted;
