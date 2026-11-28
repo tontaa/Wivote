@@ -132,6 +132,21 @@
       animation: runnerBounce 0.65s ease-in-out infinite;
     }
 
+    /* Smooth Marquee Ticker for Fact Data */
+    @keyframes factMarquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .fact-marquee-track {
+      display: inline-flex;
+      white-space: nowrap;
+      width: max-content;
+      animation: factMarquee 15s linear infinite;
+    }
+    .fact-marquee-track:hover {
+      animation-play-state: paused;
+    }
+
     details > summary {
       list-style: none;
     }
@@ -322,61 +337,86 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- STEP 2: Wi-vote Landing Page               -->
+        <!-- STEP 2: Wi-vote Landing Page (Live 30 Dec) -->
         <!-- ========================================== -->
         <section id="view-step-2" class="hidden animate-view space-y-3">
-          <!-- Election Alert Banner (Date: 30 ธันวาคม 2569) -->
+          <!-- Election Day Live Banner: 30 ธันวาคม 2569 + Real-Time Ticking Seconds -->
           <div class="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-3xl p-4 shadow-md">
             <div class="flex items-center justify-between gap-2">
-              <span class="bg-amber-400 text-slate-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                📣 ช่วงวันเลือกตั้ง • 30 ธันวาคม 2569
+              <span class="bg-amber-400 text-slate-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
+                <span>30 ธันวาคม 2569</span>
               </span>
               <span id="badge-status-2" class="text-[11px] bg-white/20 px-2.5 py-0.5 rounded-full shrink-0">ยังไม่ใช้สิทธิ</span>
             </div>
             <h2 class="text-lg font-bold mt-2 leading-snug">เลือกตั้งสภานิสิตและองค์การนิสิต ประจำปีการศึกษา 2569</h2>
-            <div class="mt-2.5 bg-black/20 rounded-2xl p-2.5 flex items-center gap-3">
+            <div class="mt-2.5 bg-black/25 rounded-2xl p-2.5 flex items-center justify-between gap-3">
               <div class="bg-white text-red-700 rounded-xl px-2.5 py-1 text-center shrink-0">
-                <div class="text-[10px] font-bold">วันเลือกตั้ง</div>
+                <div class="text-[10px] font-bold">วันนี้</div>
                 <div class="text-xs font-extrabold leading-tight">30 ธันวาคม 2569</div>
               </div>
-              <div class="text-xs space-y-0.5">
-                <p class="font-semibold text-white text-sm">เวลา 08.00 – 17.00 น.</p>
-                <p class="text-red-100 text-[11px]" id="s2-updated-time">อัปเดตล่าสุด 14:32</p>
+              <div class="text-right">
+                <p class="text-[10px] text-red-100">เวลาปัจจุบัน (เปิดหีบ 08.00 – 17.00 น.)</p>
+                <p id="live-election-clock" class="font-mono font-extrabold text-base text-amber-300 tracking-wider leading-tight">
+                  14:32:08 น.
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- Collapsed Dropdown: Combined Turnout & Faculty Standing -->
-          <details class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden group">
-            <summary class="px-3.5 py-3 flex items-center justify-between cursor-pointer select-none">
-              <div class="min-w-0 pr-2">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px] font-bold bg-slate-800 text-white px-2 py-0.5 rounded-full shrink-0">อัตราการใช้สิทธิ</span>
-                  <span class="text-xs font-extrabold text-red-600"><span id="nudge-pct">66.60</span>% (<span id="s2-voted-count">19,541</span>/29,339 คน)</span>
+          <!-- Single Unified Box: Running Fact Data Marquee + Switch Button + Expandable Details -->
+          <div class="bg-slate-900 text-white rounded-2xl overflow-hidden shadow-sm border border-slate-800">
+            <!-- Top Row: Running Fact Data Ticker + Switch Fact Button -->
+            <div class="px-3 py-2 flex items-center gap-2">
+              <span id="fact-pill-tag" class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0">
+                อัตราการใช้สิทธิ
+              </span>
+
+              <div class="flex-1 overflow-hidden relative">
+                <div class="fact-marquee-track text-xs font-medium text-slate-100">
+                  <span id="fact-marquee-a" class="pr-10">
+                    ใช้สิทธิแล้ว 19,541 จาก 29,339 คน (66.60%) • วิทยาเขตประสานมิตร 67.20% • วิทยาเขตองครักษ์ 64.59%
+                  </span>
+                  <span id="fact-marquee-b" class="pr-10" aria-hidden="true">
+                    ใช้สิทธิแล้ว 19,541 จาก 29,339 คน (66.60%) • วิทยาเขตประสานมิตร 67.20% • วิทยาเขตองครักษ์ 64.59%
+                  </span>
                 </div>
-                <p class="text-[11px] font-medium text-sky-800 mt-1 truncate" id="s2-user-fac-hint">
-                  คณะสังคมศาสตร์ อยู่อันดับ 7 • อีก 106 คน คณะของคุณถึง 70% (คณะของคุณยังไล่ทัน)
+              </div>
+
+              <button type="button" onclick="nextFactItem()"
+                class="bg-white/15 active:bg-white/30 text-amber-300 text-[10px] font-bold px-2 py-1 rounded-lg shrink-0 transition">
+                เปลี่ยนข้อมูล ↻
+              </button>
+            </div>
+
+            <!-- Collapsible Dropdown inside the SAME single box -->
+            <details class="border-t border-slate-800 bg-slate-50 text-slate-800 group">
+              <summary class="px-3 py-2 flex items-center justify-between text-[11px] font-semibold text-slate-700 cursor-pointer select-none">
+                <span>ดูเพิ่มเติม • อันดับคณะและสถิติแยกวิทยาเขต</span>
+                <span class="text-slate-500 group-open:rotate-180 transition-transform">▾</span>
+              </summary>
+              <div class="px-3 pb-3 pt-2 border-t border-slate-200 bg-white space-y-2 text-xs">
+                <div class="flex justify-between text-slate-700">
+                  <span>อัตราการใช้สิทธิรวม</span>
+                  <strong class="text-red-600"><span id="s2-voted-count">19,541</span> / 29,339 คน (<span id="nudge-pct">66.60</span>%)</strong>
+                </div>
+                <div class="flex justify-between text-slate-700">
+                  <span>วิทยาเขตประสานมิตร</span>
+                  <strong><span id="s2-p-voted">15,220</span> / 22,649 คน (<span id="s2-p-pct">67.20</span>%)</strong>
+                </div>
+                <div class="flex justify-between text-slate-700">
+                  <span>วิทยาเขตองครักษ์</span>
+                  <strong><span id="s2-o-voted">4,321</span> / 6,690 คน (<span id="s2-o-pct">64.59</span>%)</strong>
+                </div>
+                <div class="bg-sky-50 border border-sky-200 rounded-xl p-2 text-[11px] text-sky-900" id="s2-fac-detail">
+                  คณะของคุณ (คณะสังคมศาสตร์) อยู่อันดับ 4 • อีก 106 คน คณะของคุณจะถึงเป้าหมาย 70% — คณะของคุณยังไล่ทัน
+                </div>
+                <p class="text-[10px] text-slate-400">
+                  * แสดงเฉพาะอัตราการใช้สิทธิ • การระบุคณะจากรหัสบัวศรีใช้เมื่อได้รับความยินยอมตาม PDPA
                 </p>
               </div>
-              <span class="text-xs font-bold text-slate-600 shrink-0 group-open:rotate-180 transition-transform">▾</span>
-            </summary>
-            <div class="px-3.5 pb-3 pt-2 border-t border-slate-200/80 space-y-2 bg-white text-xs">
-              <div class="flex justify-between text-slate-700">
-                <span>วิทยาเขตประสานมิตร</span>
-                <strong><span id="s2-p-voted">15,220</span> / 22,649 คน (<span id="s2-p-pct">67.20</span>%)</strong>
-              </div>
-              <div class="flex justify-between text-slate-700">
-                <span>วิทยาเขตองครักษ์</span>
-                <strong><span id="s2-o-voted">4,321</span> / 6,690 คน (<span id="s2-o-pct">64.59</span>%)</strong>
-              </div>
-              <div class="bg-sky-50 border border-sky-200 rounded-xl p-2 text-[11px] text-sky-900" id="s2-fac-detail">
-                คณะของคุณ (คณะสังคมศาสตร์) อยู่อันดับ 7 • อีก 106 คน คณะของคุณจะถึงเป้าหมาย 70% — คณะของคุณยังไล่ทัน
-              </div>
-              <p class="text-[10px] text-slate-400">
-                * แสดงเฉพาะอัตราการใช้สิทธิ • การระบุคณะจากรหัสบัวศรีใช้เมื่อได้รับความยินยอมตาม PDPA
-              </p>
-            </div>
-          </details>
+            </details>
+          </div>
 
           <!-- Candidates Quick Preview (Single-Tap Card Expand, 5 Equal Categories, Fictional Data) -->
           <div class="space-y-2">
@@ -574,46 +614,43 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- STEP 4: Clear Completion + Collapsible Leaderboard -->
+        <!-- STEP 4: Clean Completion + Easy Leaderboard-->
         <!-- ========================================== -->
         <section id="view-step-4" class="hidden animate-view space-y-3.5">
-          <!-- Clear Unmistakable Completion Card -->
-          <div class="bg-emerald-50 border-2 border-emerald-400 rounded-3xl p-4 text-center space-y-1.5 shadow-xs">
+          <!-- 1. Clear Registration/Vote Completion Card -->
+          <div class="bg-emerald-50 border-2 border-emerald-400 rounded-3xl p-4 text-center space-y-2 shadow-xs">
             <div class="w-11 h-11 bg-emerald-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto shadow-sm step-active-pop">✓</div>
-            <span class="inline-block bg-emerald-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-              เสร็จสิ้นขั้นตอนการเลือกตั้งแล้ว
-            </span>
-            <h2 class="text-base font-extrabold text-emerald-950">ลงคะแนนเสร็จสมบูรณ์</h2>
-            <p class="text-xs text-emerald-800 leading-relaxed">
-              บันทึก 1 เสียงของคุณเรียบร้อยแล้วและเปิดใช้งานอินเทอร์เน็ต WISE-PSM ทันที (ไม่เชื่อมโยงตัวตนกับผู้สมัครที่คุณเลือก)
-            </p>
-            <div class="pt-1">
-              <button onclick="finishAndUseInternet()"
-                class="w-full bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs py-2.5 rounded-xl shadow-xs transition">
-                เสร็จสิ้น • ใช้งานอินเทอร์เน็ตต่อทันที
-              </button>
+            <div>
+              <span class="inline-block bg-emerald-700 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                ลงทะเบียนใช้สิทธิเสร็จเรียบร้อยแล้ว
+              </span>
+              <h2 class="text-base font-extrabold text-emerald-950 mt-1">บันทึกคะแนนและเปิดใช้งาน WISE-PSM แล้ว</h2>
+              <p class="text-[11px] text-emerald-800 mt-0.5">
+                ไม่เชื่อมโยงตัวตนกับผู้สมัครที่เลือก • 30 ธันวาคม 2569 (<span id="s4-updated-time">อัปเดตล่าสุด 14:32</span>)
+              </p>
             </div>
+            <button onclick="finishAndUseInternet()"
+              class="w-full bg-emerald-700 active:bg-emerald-800 text-white font-bold text-xs py-3 rounded-xl shadow-xs transition">
+              เสร็จสิ้น • ใช้งานอินเทอร์เน็ตต่อทันที
+            </button>
           </div>
 
-          <!-- Overall Turnout & Pushing Character -->
+          <!-- 2. Clean Overall Turnout + User Faculty Highlight -->
           <div class="bg-slate-50 border border-slate-200 rounded-3xl p-3.5 space-y-3">
-            <div class="flex items-baseline justify-between">
+            <div class="flex items-center justify-between">
               <div>
-                <p class="text-[11px] text-slate-500">อัตราการใช้สิทธิช่วงวันเลือกตั้ง (30 ธันวาคม 2569)</p>
-                <p class="text-xs font-semibold text-slate-700">
-                  ใช้สิทธิแล้ว <span id="stat-voted" class="text-red-600 font-extrabold">19,542</span> จาก <span class="font-bold">29,339</span> คน
+                <p class="text-[11px] font-semibold text-slate-500">อัตราการใช้สิทธิรวมทั้งมหาวิทยาลัย</p>
+                <p class="text-xs font-bold text-slate-800">
+                  <span id="stat-voted" class="text-red-600 font-extrabold">19,542</span> / 29,339 คน
                 </p>
               </div>
-              <div class="text-right">
-                <div class="text-2xl font-extrabold text-red-600 leading-none">
-                  <span id="stat-percent">66.61</span><span class="text-sm font-bold">%</span>
-                </div>
-                <span id="s4-updated-time" class="text-[10px] text-slate-500">อัปเดตล่าสุด 14:32</span>
+              <div class="text-2xl font-extrabold text-red-600">
+                <span id="stat-percent">66.61</span><span class="text-sm font-bold">%</span>
               </div>
             </div>
 
             <!-- Bar with Pushing Character -->
-            <div class="pt-3.5">
+            <div class="pt-3">
               <div class="relative">
                 <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
                   <div id="overall-turnout-bar" class="progress-shimmer h-2.5 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
@@ -631,64 +668,65 @@
               </div>
             </div>
 
-            <!-- User Faculty Standing Callout (Encouraging Tone, No Red Shaming, PDPA Noted) -->
-            <div class="bg-sky-50 border border-sky-200 rounded-xl px-3 py-2 text-xs text-sky-900 space-y-0.5">
-              <p class="font-bold" id="s4-user-rank">คณะของคุณ (คณะสังคมศาสตร์) อยู่อันดับ 7</p>
+            <!-- User Faculty Standing Pill -->
+            <div class="bg-sky-50 border border-sky-200 rounded-xl px-3 py-2 text-xs text-sky-900">
+              <p class="font-bold" id="s4-user-rank">คณะของคุณ (คณะสังคมศาสตร์) อยู่อันดับ 4</p>
               <p class="text-[11px]" id="s4-user-goal">อีก 105 คน คณะของคุณจะถึงเป้าหมาย 70% — คณะของคุณยังไล่ทัน</p>
             </div>
-
-            <!-- Simulation Boost Buttons (Clearly Labeled as Simulation) -->
-            <div class="space-y-1">
-              <p class="text-[10px] text-slate-500 text-center">ปุ่มจำลองเพิ่มคะแนนเสียงเข้าสู่ระบบ (สำหรับทดสอบแถบวิ่ง):</p>
-              <div class="grid grid-cols-2 gap-2">
-                <button onclick="boostCampus('p', 350)" class="bg-sky-700 active:bg-sky-800 text-white text-[11px] font-bold py-2 px-2 rounded-xl shadow-sm transition">
-                  จำลองเพิ่ม +350 เสียง (ประสานมิตร)
-                </button>
-                <button onclick="boostCampus('o', 350)" class="bg-slate-800 active:bg-slate-900 text-white text-[11px] font-bold py-2 px-2 rounded-xl shadow-sm transition">
-                  จำลองเพิ่ม +350 เสียง (องครักษ์)
-                </button>
-              </div>
-            </div>
           </div>
 
-          <!-- Campus Summary Cards (Full Campus Names to avoid Party Name Confusion) -->
-          <div class="grid grid-cols-2 gap-2">
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-2.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-[11px] font-bold text-slate-800">วิทยาเขตประสานมิตร</span>
-                <span id="pct-campus-p" class="text-xs font-extrabold text-sky-700">67.20%</span>
-              </div>
-              <p class="text-[10px] text-slate-600 mt-0.5">
-                <span id="voted-campus-p">15,220</span> / <span id="elig-campus-p">22,649</span> คน
-              </p>
-            </div>
-            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-2.5">
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-[11px] font-bold text-slate-800">วิทยาเขตองครักษ์</span>
-                <span id="pct-campus-o" class="text-xs font-extrabold text-slate-800">64.59%</span>
-              </div>
-              <p class="text-[10px] text-slate-600 mt-0.5">
-                <span id="voted-campus-o">4,321</span> / <span id="elig-campus-o">6,690</span> คน
-              </p>
-            </div>
-          </div>
-
-          <!-- Compact Leaderboard (Top 5 + User's Faculty) + Dropdown for All 18 Faculties -->
-          <div class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-3">
+          <!-- 3. Simplified Clean Leaderboard (Top 5 + User's Faculty) -->
+          <div class="bg-white border border-slate-200 rounded-3xl p-3.5 space-y-2.5">
             <div class="flex items-center justify-between">
-              <h3 class="text-xs font-extrabold text-slate-800">ลีดเดอร์บอร์ดอัตราการใช้สิทธิ (ท็อป 5 + คณะของคุณ)</h3>
-              <span class="text-[10px] text-slate-500">เป้าหมาย 70%</span>
+              <h3 class="text-xs font-extrabold text-slate-800">อันดับอัตราการใช้สิทธิ (ท็อป 5 + คณะของคุณ)</h3>
+              <span class="text-[10px] font-semibold text-slate-500">เป้าหมาย 70%</span>
             </div>
 
-            <div id="faculty-leaderboard-short" class="space-y-2.5"></div>
+            <!-- Clean Compact Rows -->
+            <div id="faculty-leaderboard-short" class="space-y-2"></div>
 
-            <!-- Collapsible Dropdown for Full 18 Faculties/Colleges -->
+            <!-- Dropdown for All Details (Campus Split + All 18 Faculties with Animated Bars) -->
             <details class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden group">
               <summary class="px-3 py-2.5 text-xs font-bold text-slate-700 flex items-center justify-between cursor-pointer select-none">
-                <span>ดูแถบวิ่งรายงานครบทั้ง 18 คณะ/วิทยาลัย</span>
+                <span>ดูข้อมูลทั้งหมด (แยกวิทยาเขต และครบทั้ง 18 คณะ/วิทยาลัย)</span>
                 <span class="group-open:rotate-180 transition-transform">▾</span>
               </summary>
-              <div class="p-3 pt-2 border-t border-slate-200 space-y-3 max-h-[300px] overflow-y-auto custom-scroll bg-white">
+              <div class="p-3 pt-2.5 border-t border-slate-200 bg-white space-y-3 max-h-[320px] overflow-y-auto custom-scroll">
+                <!-- Campus Summary Inside Dropdown -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="bg-slate-50 border border-slate-200 rounded-xl p-2">
+                    <div class="flex items-center justify-between gap-1">
+                      <span class="text-[10px] font-bold text-slate-800">วิทยาเขตประสานมิตร</span>
+                      <span id="pct-campus-p" class="text-xs font-extrabold text-sky-700">67.20%</span>
+                    </div>
+                    <p class="text-[10px] text-slate-600 mt-0.5">
+                      <span id="voted-campus-p">15,220</span> / <span id="elig-campus-p">22,649</span> คน
+                    </p>
+                  </div>
+                  <div class="bg-slate-50 border border-slate-200 rounded-xl p-2">
+                    <div class="flex items-center justify-between gap-1">
+                      <span class="text-[10px] font-bold text-slate-800">วิทยาเขตองครักษ์</span>
+                      <span id="pct-campus-o" class="text-xs font-extrabold text-slate-800">64.59%</span>
+                    </div>
+                    <p class="text-[10px] text-slate-600 mt-0.5">
+                      <span id="voted-campus-o">4,321</span> / <span id="elig-campus-o">6,690</span> คน
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Simulation Boost Buttons Inside Dropdown -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-2 space-y-1.5">
+                  <p class="text-[10px] text-slate-500 text-center">จำลองเพิ่มคะแนนเสียงเข้าสู่ระบบ (สำหรับทดสอบ):</p>
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <button onclick="boostCampus('p', 350)" class="bg-sky-700 active:bg-sky-800 text-white text-[10px] font-bold py-1.5 px-2 rounded-lg transition">
+                      จำลองเพิ่ม +350 เสียง (ประสานมิตร)
+                    </button>
+                    <button onclick="boostCampus('o', 350)" class="bg-slate-800 active:bg-slate-900 text-white text-[10px] font-bold py-1.5 px-2 rounded-lg transition">
+                      จำลองเพิ่ม +350 เสียง (องครักษ์)
+                    </button>
+                  </div>
+                </div>
+
                 <div>
                   <p class="text-[11px] font-extrabold text-slate-700 mb-2">วิทยาเขตประสานมิตร (9 คณะ/วิทยาลัย)</p>
                   <div id="faculty-list-prasarnmit" class="space-y-2.5"></div>
@@ -765,7 +803,7 @@
             <span class="text-[10px] text-emerald-600 font-semibold">Privacy-by-Design</span>
           </div>
           <div id="system-log" class="bg-slate-900 text-emerald-400 font-mono text-[11px] p-3.5 rounded-2xl h-48 overflow-y-auto custom-scroll space-y-1.5 leading-relaxed">
-            <div>[INIT] Wi-vote Captive Portal พร้อมทำงานบน WISE-PSM (วันเลือกตั้ง 30 ธันวาคม 2569)...</div>
+            <div>[INIT] Wi-vote Captive Portal พร้อมทำงานบน WISE-PSM (30 ธันวาคม 2569)...</div>
             <div>[INFO] โหลดข้อมูลทั้ง 18 คณะ/วิทยาลัย (วิทยาเขตประสานมิตร 15,220 • วิทยาเขตองครักษ์ 4,321 = 19,541 คน)</div>
           </div>
         </div>
@@ -789,7 +827,35 @@
     let hasSeenNotice = false;
     let hasVoted = false;
     let selectedCandidate = null;
+    let factIndex = 0;
     const USER_FACULTY_ID = 'soc';
+
+    // Simulated Election Day Live Clock starting at 14:32:08 on 30 ธันวาคม 2569 and ticking every second
+    let simSecondsOfDay = 14 * 3600 + 32 * 60 + 8;
+
+    function formatLiveClock(totalSec) {
+      const h = Math.floor(totalSec / 3600) % 24;
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = totalSec % 60;
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} น.`;
+    }
+
+    function formatShortTime(totalSec) {
+      const h = Math.floor(totalSec / 3600) % 24;
+      const m = Math.floor((totalSec % 3600) / 60);
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+
+    setInterval(() => {
+      simSecondsOfDay++;
+      const clockEl = document.getElementById('live-election-clock');
+      if (clockEl) {
+        clockEl.textContent = formatLiveClock(simSecondsOfDay);
+      }
+      const shortT = formatShortTime(simSecondsOfDay);
+      const s4t = document.getElementById('s4-updated-time');
+      if (s4t) s4t.textContent = `อัปเดตล่าสุด ${shortT}`;
+    }, 1000);
 
     /* Exact Reconciled Initial Data:
        วิทยาเขตประสานมิตร: 15,220 / 22,649 (67.20%)
@@ -942,11 +1008,6 @@
       return den ? ((num / den) * 100).toFixed(2) : '0.00';
     }
 
-    function getNowTimeStr() {
-      const d = new Date();
-      return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-    }
-
     function getCampusTotals(campus) {
       const list = faculties.filter(f => f.campus === campus);
       return {
@@ -959,9 +1020,63 @@
       return faculties.reduce((s, f) => s + f.voted, 0);
     }
 
+    function getRankedFaculties() {
+      return [...faculties]
+        .filter(f => f.eligible >= 30)
+        .map(f => ({ ...f, rate: f.voted / f.eligible }))
+        .sort((a, b) => b.rate - a.rate)
+        .map((f, idx) => ({ ...f, rank: idx + 1 }));
+    }
+
+    function updateFactMarquee() {
+      const totalV = getTotalVotedAll();
+      const pctAll = formatPct(totalV, totalEligibleAll);
+      const pTot = getCampusTotals('p');
+      const oTot = getCampusTotals('o');
+      const pctP = formatPct(pTot.voted, pTot.eligible);
+      const pctO = formatPct(oTot.voted, oTot.eligible);
+
+      const ranked = getRankedFaculties();
+      const topFac = ranked[0];
+      const userFac = ranked.find(f => f.id === USER_FACULTY_ID);
+      const goal70 = userFac ? Math.ceil(userFac.eligible * 0.70) : 0;
+      const remain = userFac ? Math.max(0, goal70 - userFac.voted) : 0;
+
+      const factItems = [
+        {
+          tag: 'อัตราการใช้สิทธิ',
+          text: `ใช้สิทธิแล้ว ${totalV.toLocaleString()} จาก ${totalEligibleAll.toLocaleString()} คน (${pctAll}%) • วิทยาเขตประสานมิตร ${pctP}% • วิทยาเขตองครักษ์ ${pctO}%`
+        },
+        {
+          tag: 'อันดับคณะของคุณ',
+          text: userFac
+            ? `${userFac.name} อยู่อันดับ ${userFac.rank} (${formatPct(userFac.voted, userFac.eligible)}%) • อีก ${remain.toLocaleString()} คน คณะของคุณถึง 70% — คณะของคุณยังไล่ทัน`
+            : `เป้าหมายอัตราการใช้สิทธิแต่ละคณะอยู่ที่ 70.00%`
+        },
+        {
+          tag: 'คณะอันดับ 1',
+          text: `${topFac.name} มีอัตราการใช้สิทธิสูงสุดที่ ${formatPct(topFac.voted, topFac.eligible)}% (${topFac.voted.toLocaleString()}/${topFac.eligible.toLocaleString()} คน)`
+        },
+        {
+          tag: 'เปิดหีบถึง 17.00 น.',
+          text: `วันนี้ 30 ธันวาคม 2569 ใช้สิทธิผ่านระบบ SUPREME ได้จนถึงเวลา 17.00 น. (ไม่เชื่อมโยงตัวตนกับผู้สมัครที่เลือก)`
+        }
+      ];
+
+      const current = factItems[factIndex % factItems.length];
+      document.getElementById('fact-pill-tag').textContent = current.tag;
+      document.getElementById('fact-marquee-a').textContent = current.text;
+      document.getElementById('fact-marquee-b').textContent = current.text;
+    }
+
+    function nextFactItem() {
+      factIndex++;
+      updateFactMarquee();
+    }
+
     function addLog(msg, type = 'INFO') {
       const logBox = document.getElementById('system-log');
-      const time = new Date().toLocaleTimeString('th-TH', { hour12: false });
+      const time = formatLiveClock(simSecondsOfDay).replace(' น.', '');
       const color = type === 'PRIVACY' ? 'text-amber-300' : type === 'SUCCESS' ? 'text-emerald-400' : 'text-sky-300';
       const entry = document.createElement('div');
       entry.className = color;
@@ -1052,11 +1167,43 @@
       }, 60);
     }
 
+    // Clean, ultra-scannable row for Step 4 Top 5 + User's Faculty Leaderboard
+    function buildCleanLeaderboardRow(f, animateBars = true, isUser = false) {
+      const pct = formatPct(f.voted, f.eligible);
+      const barWidth = animateBars ? Math.min(100, parseFloat(pct)) : 0;
+      const rankBadgeClass = f.rank === 1
+        ? 'bg-amber-400 text-slate-900'
+        : isUser
+          ? 'bg-sky-600 text-white'
+          : 'bg-slate-200 text-slate-700';
+
+      return `
+        <div class="rounded-2xl px-3 py-2 border ${isUser ? 'bg-sky-50 border-sky-300' : 'bg-slate-50/70 border-slate-200/80'}">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-5 h-5 rounded-full ${rankBadgeClass} text-[10px] font-extrabold flex items-center justify-center shrink-0">
+                ${f.rank}
+              </span>
+              <span class="text-xs font-bold text-slate-800 truncate">
+                ${f.name} ${isUser ? '<span class="text-sky-700">(คณะของคุณ)</span>' : ''}
+              </span>
+            </div>
+            <span class="text-xs font-extrabold ${isUser ? 'text-sky-700' : 'text-slate-800'} shrink-0">${pct}%</span>
+          </div>
+          <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-700 ease-out"
+                 style="width: ${barWidth}%; background: ${isUser ? '#0284c7' : '#334155'};">
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Detailed bar inside the expandable 18-faculty dropdown
     function buildUniqueFacultyBar(f, animateBars = true, isUser = false) {
       const pct = formatPct(f.voted, f.eligible);
       const barWidth = animateBars ? Math.min(100, parseFloat(pct)) : 0;
       const runnerLeft = animateBars ? Math.min(91, Math.max(2, parseFloat(pct))) : 2;
-      const rankLabel = f.rank ? `#${f.rank} ` : '';
 
       return `
         <div class="rounded-2xl p-2.5 bg-white shadow-xs transition" style="border: ${isUser ? '2px solid #0284c7' : `1.5px solid ${f.border}`}; background: ${isUser ? '#f0f9ff' : '#ffffff'};">
@@ -1064,7 +1211,7 @@
             <div class="min-w-0">
               <div class="flex items-center gap-1.5">
                 <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shrink-0" style="background:${f.badgeBg}; color:${f.badgeText};">
-                  ${rankLabel}${f.short}
+                  ${f.short}
                 </span>
                 <p class="text-[11px] font-bold text-slate-800 truncate">${f.name} ${isUser ? '(คณะของคุณ)' : ''}</p>
               </div>
@@ -1097,21 +1244,13 @@
       const oContainer = document.getElementById('faculty-list-ongkharak');
       const shortContainer = document.getElementById('faculty-leaderboard-short');
 
-      const ranked = [...faculties]
-        .filter(f => f.eligible >= 30)
-        .map(f => ({ ...f, rate: f.voted / f.eligible }))
-        .sort((a, b) => b.rate - a.rate)
-        .map((f, idx) => ({ ...f, rank: idx + 1 }));
-
+      const ranked = getRankedFaculties();
       const userFac = ranked.find(f => f.id === USER_FACULTY_ID);
+
       if (userFac) {
         const goal70 = Math.ceil(userFac.eligible * 0.70);
         const remain = Math.max(0, goal70 - userFac.voted);
-        const msgShort = remain > 0
-          ? `${userFac.name} อยู่อันดับ ${userFac.rank} • อีก ${remain.toLocaleString()} คน คณะของคุณถึง 70% (คณะของคุณยังไล่ทัน)`
-          : `${userFac.name} อยู่อันดับ ${userFac.rank} • ถึงเป้าหมาย 70% แล้ว`;
 
-        document.getElementById('s2-user-fac-hint').textContent = msgShort;
         document.getElementById('s2-fac-detail').textContent =
           remain > 0
             ? `คณะของคุณ (${userFac.name}) อยู่อันดับ ${userFac.rank} • อีก ${remain.toLocaleString()} คน คณะของคุณจะถึงเป้าหมาย 70% — คณะของคุณยังไล่ทัน`
@@ -1129,7 +1268,7 @@
       const shortList = top5.some(f => f.id === USER_FACULTY_ID) ? top5 : [...top5, userFac].filter(Boolean);
 
       shortContainer.innerHTML = shortList
-        .map(f => buildUniqueFacultyBar(f, animateBars, f.id === USER_FACULTY_ID))
+        .map(f => buildCleanLeaderboardRow(f, animateBars, f.id === USER_FACULTY_ID))
         .join('');
 
       pContainer.innerHTML = faculties
@@ -1151,7 +1290,7 @@
       const oTot = getCampusTotals('o');
       const pctP = formatPct(pTot.voted, pTot.eligible);
       const pctO = formatPct(oTot.voted, oTot.eligible);
-      const timeStr = getNowTimeStr();
+      const timeStr = formatShortTime(simSecondsOfDay);
 
       document.getElementById('stat-voted').textContent = totalV.toLocaleString();
       document.getElementById('stat-percent').textContent = pctAll;
@@ -1171,7 +1310,6 @@
       document.getElementById('voted-campus-o').textContent = oTot.voted.toLocaleString();
       document.getElementById('elig-campus-o').textContent = oTot.eligible.toLocaleString();
 
-      document.getElementById('s2-updated-time').textContent = `อัปเดตล่าสุด ${timeStr}`;
       document.getElementById('s4-updated-time').textContent = `อัปเดตล่าสุด ${timeStr}`;
 
       if (animateBars) {
@@ -1179,6 +1317,7 @@
         document.getElementById('turnout-pusher').style.left = `calc(${Math.min(92, parseFloat(pctAll))}% - 12px)`;
       }
 
+      updateFactMarquee();
       renderFacultyLists(animateBars);
     }
 
@@ -1195,14 +1334,14 @@
         subtitle.textContent = 'ขั้นที่ 1/4: เชื่อมต่อเครือข่าย WISE-PSM';
       } else if (step === 2) {
         document.getElementById('view-step-2').classList.remove('hidden');
-        subtitle.textContent = 'ขั้นที่ 2/4: แจ้งเตือนข้อมูลเลือกตั้ง (Wi-vote)';
+        subtitle.textContent = 'ขั้นที่ 2/4: แจ้งเตือนข้อมูลเลือกตั้ง (30 ธันวาคม 2569)';
         updateTurnoutUI(false);
       } else if (step === 3) {
         document.getElementById('view-step-3').classList.remove('hidden');
         subtitle.textContent = 'ขั้นที่ 3/4: ลงคะแนนผ่านระบบ SUPREME';
       } else if (step === 4) {
         document.getElementById('view-step-4').classList.remove('hidden');
-        subtitle.textContent = 'ขั้นที่ 4/4: ลงคะแนนเสร็จสมบูรณ์ (30 ธันวาคม 2569)';
+        subtitle.textContent = 'ขั้นที่ 4/4: ลงทะเบียนใช้สิทธิเสร็จสมบูรณ์';
         setTimeout(() => updateTurnoutUI(true), 120);
       }
     }
@@ -1228,7 +1367,7 @@
         } else {
           hasSeenNotice = true;
           updateStateBadges();
-          addLog('ตรวจพบสถานะ: "ยังไม่ใช้สิทธิ" -> แสดงหน้า Wi-vote Landing Page', 'INFO');
+          addLog('ตรวจพบสถานะ: "ยังไม่ใช้สิทธิ" -> แสดงหน้า Wi-vote Landing Page (30 ธันวาคม 2569)', 'INFO');
           showStep(2);
         }
       }, 900);
@@ -1336,6 +1475,7 @@
       hasSeenNotice = false;
       hasVoted = false;
       selectedCandidate = null;
+      factIndex = 0;
       faculties.forEach((f, idx) => {
         f.voted = INITIAL_FACULTIES[idx].voted;
       });
@@ -1348,15 +1488,6 @@
       addLog('รีเซ็ตสถานะและสถิติรายคณะกลับสู่ค่าเริ่มต้นแล้ว', 'INFO');
       showStep(1);
     }
-
-    // Throttled live clock update (every 8 seconds, respecting <= 5-10s rule)
-    setInterval(() => {
-      const t = getNowTimeStr();
-      const s2t = document.getElementById('s2-updated-time');
-      const s4t = document.getElementById('s4-updated-time');
-      if (s2t) s2t.textContent = `อัปเดตล่าสุด ${t}`;
-      if (s4t) s4t.textContent = `อัปเดตล่าสุด ${t}`;
-    }, 8000);
   </script>
 </body>
 </html>
